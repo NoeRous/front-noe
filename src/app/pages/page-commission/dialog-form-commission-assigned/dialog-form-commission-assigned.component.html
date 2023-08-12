@@ -1,0 +1,41 @@
+<h2 mat-dialog-title>Editar
+</h2>
+
+<div>
+    <form [formGroup]="commissionAssignedForm" (ngSubmit)="onSubmit()">
+        <mat-dialog-content class="mat-typography">
+
+            <div class="row gy-4 align-center">
+                <div class="col-sm-6">
+                    <mat-form-field>
+                        <mat-label>Fecha apertura de acta</mat-label>
+                        <input matInput [matDatepicker]="picker"
+                            formControlName="act_init_date">
+                        <mat-hint>DD/MM/YYYY</mat-hint>
+                        <mat-datepicker-toggle matIconSuffix
+                            [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div class="col-sm-6">
+                    <mat-form-field>
+                        <mat-label>Fecha cierre de acta</mat-label>
+                        <input matInput [matDatepicker]="pickerEnd"
+                            formControlName="act_end_date">
+                        <mat-hint>DD/MM/YYYY</mat-hint>
+                        <mat-datepicker-toggle matIconSuffix
+                            [for]="pickerEnd"></mat-datepicker-toggle>
+                        <mat-datepicker #pickerEnd></mat-datepicker>
+                    </mat-form-field>
+                </div>
+            </div>
+        </mat-dialog-content>
+        <hr>
+        <mat-dialog-actions align="end">
+            <button mat-stroked-button color="warn" mat-dialog-close>Cancel</button>
+            <button type="submit" mat-stroked-button color="primary">
+                Guardar Cambios
+            </button>
+        </mat-dialog-actions>
+    </form>
+</div>

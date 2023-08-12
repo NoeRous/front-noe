@@ -1,0 +1,245 @@
+<div class="container-fluid mt-5">
+    <div class="nk-content-inner">
+        <div class="nk-block-head-content">
+            <!-- <div class="nk-block-head nk-block-head-sm"> -->
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item active" aria-current="page">Convocatorias</li>
+                </ol>
+            </nav>
+            <div class="nk-block-between">
+                <div class="nk-block-head-content">
+                    <!-- <h5 class="nk-block-title page-title">Convocatorias</h5> -->
+                </div><!-- .nk-block-head-content -->
+                <div style="display: flex; justify-content: flex-end;">
+                    <button class="btn btn-primary" routerLink="/admin/announcement/create" label="">
+                        <em class="icon ni ni-plus"></em><span>Registrar</span>
+                    </button>
+                </div>
+            </div><!-- .nk-block-between -->
+            <!-- </div> -->
+        </div>
+    
+            <div class="nk-block">
+                    <div class="card">
+                        <p-table #dt1
+                        [value]="announcements"
+                        dataKey="id"
+                        [rows]="10"
+                        [showCurrentPageReport]="true"
+                        [rowsPerPageOptions]="[10, 25, 50]"
+                        
+                        [paginator]="true"
+                        currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} registros"
+                        [globalFilterFields]="['name', 'country.name', 'representative.name', 'status']"
+                        styleClass="p-datatable-sm"
+                        [resizableColumns]="true"
+                        >
+                        
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th style="width: 5%">Nro.</th>
+                                <th pSortableColumn="name" style="width:15%">Nombre <p-sortIcon field="name"></p-sortIcon></th>
+                                <th pSortableColumn="description" style="width:15%">Descripción <p-sortIcon field="description"></p-sortIcon></th>
+                                <th pSortableColumn="date_init" style="width:15%">Fecha Inicio <p-sortIcon field="date_init"></p-sortIcon></th>
+                                <th pSortableColumn="date_end" style="width:15%">Fecha Finalización <p-sortIcon field="date_end"></p-sortIcon></th>
+                                <th  style="width:10%">Opciones</th>
+                                <th  style="width:10%">Instituciones <br>y cargos</th>
+                            </tr>
+                          <tr>
+                            <th>
+                            </th>
+                            <th>
+                                <p-columnFilter type="text" field="name"></p-columnFilter>
+                            </th>
+                            <th>
+                              <p-columnFilter type="text" field="description"></p-columnFilter>
+                            </th>
+                            <th>
+                              <p-columnFilter type="text" field="date_init"></p-columnFilter>
+                            </th>
+                            <th>
+                              <p-columnFilter type="text" field="date_end"></p-columnFilter>
+                            </th>
+                            <th>
+                            </th>
+                          </tr>
+                            
+                        </ng-template>
+                        <ng-template pTemplate="body" let-announcement let-rowIndex="rowIndex">
+                            <tr [pSelectableRow]="announcement" >
+          
+                                <td>{{rowIndex + 1}}</td>
+                              
+                                <td>
+                                    <span class="p-column-title">Name</span>
+                                    {{announcement.name}}
+                                </td>
+                                <td>
+                                    <span class="p-column-title">Name</span>
+                                    {{announcement.description}}
+                                </td>
+                                <td>
+                                    <span class="p-column-title">Name</span>
+                                    {{announcement.date_init | date: 'dd/MM/yyyy hh:mm:ss'}}
+                                    <br>
+                                          <span class="badge rounded-pill bg-outline-info">{{announcement.announcement_name}}</span>
+                                </td>
+                                <td>
+                                  <span class="p-column-title">Name</span>
+                                  {{announcement.date_end  | date: 'dd/MM/yyyy hh:mm:ss'}}
+                              </td>
+                                
+                               <td>
+                                  <button mat-icon-button color="" (click)="btnEdit(announcement)" >
+                                    <mat-icon>edit</mat-icon>
+                                  </button>
+                                  <button mat-icon-button color="warn" (click)="btnDelete(announcement)" >
+                                    <mat-icon>delete</mat-icon>
+                                  </button>
+                              </td>
+                              <td>
+                                <button mat-mini-fab color="primary" (click)="btnAnnouncementInstitutionPosition(announcement)">
+                                    <mat-icon>arrow_forward</mat-icon>
+                                </button>
+                            </td>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="emptymessage">
+                            <tr>
+                                <td colspan="4">No customers found.</td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+                    
+                    <!-- <table class="table table-bordered">
+                        <thead>
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Descripción</th>
+                            <th scope="col">Fecha de inicio</th>
+                            <th scope="col">Fecha Fin</th>
+                            <th scope="col">Cite</th>
+                            <th scope="col">Opc.</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let announcement of announcements; let i=index" >
+                            <th scope="row">{{i+1}}</th>
+                            <td>{{announcement.name}}</td>
+                            <td>{{announcement.description}}</td>
+                            <td>{{announcement.date_init}}</td>
+                            <td>{{announcement.date_end}}</td>
+                            <td>
+                                {{announcement.cite}}
+                                
+                            </td>
+                            <td>
+                                <button mat-icon-button  (click)="btnAnnouncementInstitutionPosition(announcement)" >
+                                    <mat-icon>visibility</mat-icon>
+                                  </button>
+                                <button mat-icon-button  (click)="btnEdit(announcement)" >
+                                    <mat-icon>edit</mat-icon>
+                                  </button>
+                                  <button mat-icon-button color="warn" (click)="btnDelete(announcement)" >
+                                    <mat-icon>delete</mat-icon>
+                                  </button>
+                                 
+                            </td>
+                          </tr>
+                        
+                        
+                        </tbody>
+                      </table> -->
+
+              
+            </div><!-- .nk-block -->
+            <div class="nk-add-product toggle-slide toggle-slide-right" data-content="addProduct" data-toggle-screen="any" data-toggle-overlay="true" data-toggle-body="true" data-simplebar>
+                <div class="nk-block-head">
+                    <div class="nk-block-head-content">
+                        <h5 class="nk-block-title">New Product</h5>
+                        <div class="nk-block-des">
+                            <p>Add information and add new product.</p>
+                        </div>
+                    </div>
+                </div><!-- .nk-block-head -->
+                <div class="nk-block">
+                    <div class="row g-3">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label class="form-label" for="product-title">Product Title</label>
+                                <div class="form-control-wrap">
+                                    <input type="text" class="form-control" id="product-title">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-label" for="regular-price">Regular Price</label>
+                                <div class="form-control-wrap">
+                                    <input type="number" class="form-control" id="regular-price">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-label" for="sale-price">Sale Price</label>
+                                <div class="form-control-wrap">
+                                    <input type="number" class="form-control" id="sale-price">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-label" for="stock">Stock</label>
+                                <div class="form-control-wrap">
+                                    <input type="text" class="form-control" id="stock">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-label" for="SKU">SKU</label>
+                                <div class="form-control-wrap">
+                                    <input type="text" class="form-control" id="SKU">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label class="form-label" for="category">Category</label>
+                                <div class="form-control-wrap">
+                                    <input type="text" class="form-control" id="category">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label class="form-label" for="tags">Tags</label>
+                                <div class="form-control-wrap">
+                                    <input type="text" class="form-control" id="tags">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="upload-zone small bg-lighter my-2">
+                                <div class="dz-message">
+                                    <span class="dz-message-text">Drag and drop file</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <button class="btn btn-primary"><em class="icon ni ni-plus"></em><span>Add New</span></button>
+                        </div>
+                    </div>
+                </div><!-- .nk-block -->
+            </div>
+        </div>
+
+</div>
+    
+
+               
+

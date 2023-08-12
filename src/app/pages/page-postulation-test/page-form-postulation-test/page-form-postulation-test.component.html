@@ -1,0 +1,97 @@
+<div class="container-fluid pt-5">
+    <div class="nk-content-inner">
+        <div class="nk-block-head nk-block-head-sm ">
+            <div class="nk-block-between">
+                <div class="nk-block-head-content">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item active" aria-current="page">Examen</li>
+                        </ol>
+                    </nav>
+                </div>
+                <div class="nk-block-head-content">
+
+                </div>
+            </div>
+        </div>
+        <div class="nk-block">
+            <div class="row">
+                <div class="col-md-9">
+                    <div class="dragula-container card card-bordered p-4 h-100"  *ngIf="postulationTest" >
+                        <div class="row">
+                            <div class="col-md-4">
+                                <strong>CARGO : </strong> {{postulationTest.postulation.announcementInstitutionPosition.institutionPosition.position.name}}
+                            </div>
+                            <div class="col-md-4"></div>
+                            <div class="col-md-4">
+                                <span>Progreso examen:</span>
+
+                                <div class="progress progress-lg">
+                                    <div class="progress-bar"   [style.width]="porcentajeProgreso + '%'" > {{porcentajeProgreso}} %</div>
+                                </div>
+                            </div>
+                        </div>
+                        <br> <br>
+                        <div class="p-3 bg-white border border-light round-lg" style="cursor: pointer !important;  "
+                            *ngFor="let item of pageQuestions; let i=index">
+                        <strong>{{(indexPage + 1) + i}}. {{ item.test_group_question.question.name }}</strong>    
+
+                            <br>
+
+                            <ul class="link-list-opt no-bdr">
+                                <li
+                                    *ngFor="let subtask of item.test_group_question.question.question_response; let j=index">
+                                    <a *ngIf="item.test_group_question.question.type_form=='check'">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input"
+                                                [attr.id]="'response-check-'+i+j" [attr.name]="'check-'+i"
+                                                (change)="sendTestResponse(item,subtask, i)">
+                                            <label class="custom-control-label"
+                                                [attr.for]="'response-check-'+i+j">{{subtask.name}} </label>
+                                        </div>
+                                    </a>
+
+                                    <a *ngIf="item.test_group_question.question.type_form=='radio'">
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" [attr.id]="'response-radio-'+i+j"
+                                                [attr.name]="'radio-'+i" class="custom-control-input "
+                                                (change)="sendTestResponse(item,subtask, i)">
+                                            <label class="custom-control-label"
+                                                [attr.for]="'response-radio-'+i+j">{{subtask.name}} </label>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <br> <br>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <button type="button" class="btn btn-round btn-danger m-2" (click)="btnPostulation()" ><span>Finalizar</span> </button>
+                            </div>
+                            <div class="col-md-6 d-flex justify-content-end">
+                                <button type="button" class="btn btn-round btn-primary m-2" [disabled]="indexPage==0" (click)="btnAnterior()" ><em class="icon ni ni-arrow-left"></em><span>Anterior</span> </button>
+                                <button type="button" class="btn btn-round btn-primary m-2" [disabled]="indexPage>=this.questions.length" (click)="btnSiguiente()"><span>Siguiente</span> <em class="icon ni ni-arrow-right"></em> </button>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+
+                <div class="col-md-3">
+                    <div class="card card-bordered p-4 " >
+                        <p>Preguntas:</p>
+                        <div class="d-flex align-content-start flex-wrap" *ngIf="panelResponses" >
+                            <div *ngFor="let item of panelResponses; let i=index" class=" m-1 p-2 " [ngClass]="{'bg-light': !item.is_response, 'bg-gray-700 text-white': item.is_response}" style="width: 45px; text-align: center; border-radius: 5px;">{{i+1}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

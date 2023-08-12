@@ -1,0 +1,95 @@
+<br>
+<!-- content @s -->
+<div class="nk-content ">
+    <div class="container-fluid">
+        <div class="nk-content-inner">
+            <div class="nk-content-body">
+                <div class="nk-block-head nk-block-head-sm">
+                    <div class="nk-block-between">
+                        <div class="nk-block-head-content">
+                            <h3 class="nk-block-title page-title">Seguimiento Postulaciones</h3>
+                        </div><!-- .nk-block-head-content -->
+                        <div >
+                            <form [formGroup]="announcementSelectForm" >
+                            <mat-form-field>
+                                <mat-label>Convocatoria</mat-label>
+                                <mat-select matNativeControl  placeholder="Todos" formControlName="announcementId" (selectionChange)="selectionChangeAnnouncement($event)" >
+                                <mat-option *ngFor="let item of announcements" [value]="item.id">
+                                    {{item.name}}
+                                </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            </form>
+                        </div>
+                    </div><!-- .nk-block-between -->
+                </div><!-- .nk-block-head -->
+                <div class="nk-block">
+                    <div class="nk-tb-list is-separate is-medium mb-3">
+                        <div class="nk-tb-item nk-tb-head">
+                            <!-- <div class="nk-tb-col nk-tb-col-check">
+                                <div class="custom-control custom-control-sm custom-checkbox notext">
+                                    <input type="checkbox" class="custom-control-input" id="oid">
+                                    <label class="custom-control-label" for="oid"></label>
+                                </div>
+                                
+                            </div> -->
+                        
+                            <div class="nk-tb-col"><span>Cod</span></div>
+                            <div class="nk-tb-col"><span>Convocatoria</span></div>
+                            <div class="nk-tb-col"><span>Fase</span></div>
+                            <div class="nk-tb-col"><span>Revisado/No revisado</span></div>
+                            <div class="nk-tb-col"><span class="d-none d-sm-block">ESFM/UP/UA </span></div>
+                            <div class="nk-tb-col"><span>Tipo de cargo</span></div>
+                            <div class="nk-tb-col"><span>Cargo</span></div>
+                            <div class="nk-tb-col"><span>Nombre postulante</span></div>
+                            <div class="nk-tb-col"><span>Carnet</span></div>
+                            <div class="nk-tb-col"><span>Opciones</span></div>
+                        </div><!-- .nk-tb-item -->
+                        <div *ngFor="let postulacion of postulations" class="nk-tb-item">
+                            <!-- <div class="nk-tb-col nk-tb-col-check">
+                                <div class="custom-control custom-control-sm custom-checkbox notext">
+                                    <input class="custom-control-input" [id]="'oid' + postulacion.id">
+                                    <label class="custom-control-label" [for]="'oid' + postulacion.id"></label>
+                                </div>
+                            </div> -->
+                            <div class="nk-tb-col">
+                                <span class="tb-lead"><a href="#">#{{postulacion.id}}</a></span>
+                            </div>
+                            <div class="nk-tb-col">
+                                <span class="tb-sub">{{postulacion.announcement_name}}</span>
+                            </div>
+                            <div class="nk-tb-col">
+                                <span class="tb-sub">{{postulacion.current_phase_name}}</span>
+                            </div>
+                            <div class="nk-tb-col">
+                                <span class="tb-sub">{{postulacion.is_valid?'Revisado':'No Revisado'}}</span>
+                            </div>
+                            <div class="nk-tb-col">
+                                <span class="dot bg-warning d-sm-none"></span>
+                                <span class="tb-sub">{{postulacion.institution_name}}</span>
+                            </div>
+                            <div class="nk-tb-col">
+                                <span class="tb-sub">{{postulacion.position_type_name}}</span>
+                            </div>
+                            <div class="nk-tb-col">
+                                <span class="tb-sub text-primary">{{postulacion.position_name}}</span>
+                            </div>
+                            <div class="nk-tb-col">
+                                <span class="tb-sub text-primary">{{postulacion.person_firts_name +' '+postulacion.person_second_name+' '+postulacion.person_last_name+' '+postulacion.person_mothers_last_name+' '+postulacion.person_husband_last_name}}</span>
+                            </div>
+                            <div class="nk-tb-col">
+                                <span class="tb-sub text-primary">{{postulacion.person_identity_card}}</span>
+                            </div>
+                            <div class="nk-tb-col">
+                                <button mat-icon-button  (click)="btnShowDetails(postulacion)" >
+                                    <mat-icon>visibility</mat-icon>
+                                  </button>
+                            </div>
+                        </div><!-- .nk-tb-item -->
+                    </div><!-- .nk-tb-list -->
+                </div><!-- .nk-block -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- content @e -->

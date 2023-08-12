@@ -1,0 +1,109 @@
+<br><br><br>
+<div class="container-fluid">
+    <div class="nk-content-inner">
+        <div class="nk-content-body">
+            <div class="nk-block-head nk-block-head-sm">
+                <div class="nk-block-between">
+                    <div class="nk-block-head-content">
+                        <div class="nk-block-head-sub"><a class="back-to" routerLink="/admin/institution-position"><em
+                                    class="icon ni ni-arrow-left"></em><span>Volver a la lista</span></a></div>
+                    </div><!-- .nk-block-head-content -->
+                    <div class="nk-block-head-content">
+                    </div><!-- .nk-block-head-content -->
+                </div><!-- .nk-block-between -->
+            </div><!-- .nk-block-head -->
+            <div class="nk-block">
+                <div class="nk-block nk-block-lg">
+                    <div class="nk-block-head">
+                        <div class="nk-block-head-content" *ngIf="!id">
+                            <h4 class="title nk-block-title">Llene los campos</h4>
+                            <div class="nk-block-des">
+                                <p>ingrese la información requerida</p>
+                            </div>
+                        </div>
+
+                        <div class="nk-block-head-content" *ngIf="id">
+                            <h4 class="title nk-block-title">Editar</h4>
+                        </div>
+
+                    </div>
+                    <div class="card card-bordered card-preview">
+                        <div class="card-inner">
+                            <div class="preview-block">
+                                <br>
+                                <form [formGroup]="institutionPositionForm" (ngSubmit)="onSubmit()">
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="row gy-4">
+                                                <div class="col-sm-6">
+                                                    <mat-form-field>
+                                                        <mat-label>Institución</mat-label>
+                                                        <mat-select  formControlName="institution">
+                                                          <mat-option *ngFor="let item of institutions" [value]="item.id">
+                                                            {{item.name}}
+                                                          </mat-option>
+                                                        </mat-select>
+                                                      </mat-form-field>
+                                                </div>
+
+                                                <div class="col-sm-6">
+                                                    <mat-form-field>
+                                                        <mat-label>Cargo</mat-label>
+                                                        <mat-select  formControlName="position">
+                                                          <mat-option *ngFor="let item of positions" [value]="item.id">
+                                                            {{item.name}}
+                                                          </mat-option>
+                                                        </mat-select>
+                                                      </mat-form-field>
+                                                </div>
+
+                                            </div>
+                                            <br>
+                                            
+
+                                            
+
+                                            <div class="row gy-4 align-center">
+                                                <div class="col-sm-6">
+                                                    <section class="example-section">
+                                                        <mat-slide-toggle
+                                                        formControlName="enabled"
+                                                            class="example-margin"
+                                                            >
+                                                            {{institutionPositionForm.controls['enabled'].value?'Habilitado':'Deshabilitado'}}
+                                                        </mat-slide-toggle>
+                                                    </section>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <hr class="preview-hr">
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                        </div>
+                                        <div class="col-md-8 text-lg-end">
+                                            <a routerLink="/admin/institution-position" mat-raised-button color="warn"
+                                                class="mx-2">Cancelar</a>
+                                            <button type="submit" mat-raised-button color="primary"> 
+                                                {{this.id?'Guardar Cambios':'Guardar'}} </button>
+                                        </div>
+                                        <div class="col-md-2">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div><!-- .card-preview -->
+                </div>
+            </div><!-- .nk-block -->
+
+        </div>
+    </div>
+</div>

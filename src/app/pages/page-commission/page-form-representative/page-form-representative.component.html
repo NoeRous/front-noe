@@ -1,0 +1,210 @@
+<div class="container-fluid mt-5">
+    <div class="nk-content-inner">
+        <div class="nk-block-head nk-block-head-sm ">
+            <div class="nk-block-between">
+                <div class="nk-block-head-content">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a routerLink="/admin/commission">Mis Comisiones</a></li>
+                            <li class="breadcrumb-item"><a
+                                    [routerLink]="['/admin/commission/members', this.commissionId]">Integrantes</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Nuevo</li>
+                        </ol>
+                    </nav>
+                </div>
+                <div class="nk-block-head-content">
+
+                </div>
+            </div>
+        </div>
+
+        <div class="nk-block">
+            <div class="card">
+                <div class="card-aside-wrap">
+                    <div class="card-inner card-inner-sm">
+                        <div class="nk-block-head nk-block-head-sm">
+                            <h5 class="title nk-block-title">Formulario de Registro de Representante</h5>
+                            <div class="nk-block-des">
+                                <p>Ingrese la información requerida verificando la información.</p>
+                            </div>
+                        </div>
+                        <div class="nk-block" *ngIf="!edit">
+                            <form [formGroup]="commissionExternalForm" (ngSubmit)="onSubmit()">
+                                <div class="row gy-8">
+                                    <div class="row gy-8">
+                                        <div class="col-sm-3">
+                                            <mat-form-field appearance="fill">
+                                                <mat-label>Primer Nombre</mat-label>
+                                                <input matInput formControlName="firts_name">
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="col-sm-3">
+                                            <mat-form-field appearance="fill">
+                                                <mat-label>Segundo nombre</mat-label>
+                                                <input matInput formControlName="second_name">
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="col-sm-3">
+                                            <mat-form-field appearance="fill">
+                                                <mat-label>Apellido Paterno</mat-label>
+                                                <input matInput formControlName="last_name">
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <mat-form-field appearance="fill">
+                                                <mat-label>Apellido Materno</mat-label>
+                                                <input matInput formControlName="mothers_last_name">
+                                            </mat-form-field>
+                                        </div>
+
+                                    </div>
+                                    <div class="row gy-8">
+                                        <div class="col-sm-3">
+                                            <mat-form-field appearance="fill">
+                                                <mat-label>Apellido de casada</mat-label>
+                                                <input matInput formControlName="husband_last_name">
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="col-sm-3">
+                                            <mat-form-field appearance="fill">
+                                                <mat-label>Carnet de identidad</mat-label>
+                                                <input matInput formControlName="identity_card">
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="col-sm-3">
+                                            <mat-form-field appearance="outline" hintLabel="Max 2 caracteres">
+                                                <mat-label>Complemento de carnet</mat-label>
+                                                <input matInput #input maxlength="2" placeholder="Ej:1J" formControlName="identity_card_complement">
+                                                <mat-hint align="end">{{input.value.length}}/2</mat-hint>
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <mat-form-field appearance="fill">
+                                                <mat-label>Celular</mat-label>
+                                                <input matInput formControlName="personal_number">
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+
+                                    <div class="row gy-8">
+                                        <div class="col-sm-3">
+                                            <mat-form-field appearance="fill">
+                                                <mat-label>Institucion Representante</mat-label>
+                                                <input matInput formControlName="name_institution">
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <mat-form-field appearance="fill">
+                                                <mat-label>Asignado</mat-label>
+                                                <input matInput formControlName="name_role">
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row ">
+                                    <div class="col-sm-12 my-1" style="width: 100%; text-align: right;">
+                                        <a [routerLink]="['/admin/commission/members', this.commissionId]" mat-raised-button color="warn" mat-raised-button  class="mx-2">Cancelar</a>
+                                        <button mat-raised-button color="primary" type="submit"
+                                            [disabled]="commissionExternalForm.invalid">Registrar</button>
+                                    </div>
+                                </div>
+                            </form><!-- form -->
+                        </div>
+
+                        <div class="nk-block" *ngIf="edit">
+                            <form [formGroup]="commissionExternalEditForm" (ngSubmit)="onSubmitEdit()">
+                                <div formGroupName="representative">
+                                    <div class="row gy-8">
+                                        <div class="row gy-8">
+                                            <div class="col-sm-3">
+                                                <mat-form-field appearance="fill">
+                                                    <mat-label>Primer Nombre</mat-label>
+                                                    <input matInput formControlName="firts_name">
+                                                </mat-form-field>
+                                            </div>
+    
+                                            <div class="col-sm-3">
+                                                <mat-form-field appearance="fill">
+                                                    <mat-label>Segundo nombre</mat-label>
+                                                    <input matInput formControlName="second_name">
+                                                </mat-form-field>
+                                            </div>
+    
+                                            <div class="col-sm-3">
+                                                <mat-form-field appearance="fill">
+                                                    <mat-label>Apellido Paterno</mat-label>
+                                                    <input matInput formControlName="last_name">
+                                                </mat-form-field>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <mat-form-field appearance="fill">
+                                                    <mat-label>Apellido Materno</mat-label>
+                                                    <input matInput formControlName="mothers_last_name">
+                                                </mat-form-field>
+                                            </div>
+    
+                                        </div>
+                                        <div class="row gy-8">
+                                            <div class="col-sm-3">
+                                                <mat-form-field appearance="fill">
+                                                    <mat-label>Apellido de casada</mat-label>
+                                                    <input matInput formControlName="husband_last_name">
+                                                </mat-form-field>
+                                            </div>
+    
+                                            <div class="col-sm-3">
+                                                <mat-form-field appearance="fill">
+                                                    <mat-label>Carnet de identidad</mat-label>
+                                                    <input matInput formControlName="identity_card">
+                                                </mat-form-field>
+                                            </div>
+    
+                                            <div class="col-sm-3">
+                                                <mat-form-field appearance="outline" hintLabel="Max 2 caracteres">
+                                                    <mat-label>Complemento de carnet</mat-label>
+                                                    <input matInput #input maxlength="2" placeholder="Ej:1J" formControlName="identity_card_complement">
+                                                    <mat-hint align="end">{{input.value.length}}/2</mat-hint>
+                                                </mat-form-field>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <mat-form-field appearance="fill">
+                                                    <mat-label>Celular</mat-label>
+                                                    <input matInput formControlName="personal_number">
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row gy-8">
+                                    <div class="col-sm-3">
+                                        <mat-form-field appearance="fill">
+                                            <mat-label>Institucion Representante</mat-label>
+                                            <input matInput formControlName="name_institution">
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <mat-form-field appearance="fill">
+                                            <mat-label>Asignado</mat-label>
+                                            <input matInput formControlName="name_role">
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div class="row ">
+                                    <div class="col-sm-12 my-1" style="width: 100%; text-align: right;">
+                                        <a [routerLink]="['/admin/commission/members', this.commissionId]" mat-raised-button color="warn" mat-raised-button  class="mx-2">Cancelar</a>
+                                        <button mat-raised-button color="primary" type="submit"
+                                            [disabled]="commissionExternalEditForm.invalid">Guardar</button>
+                                    </div>
+                                </div>
+                            </form><!-- form -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

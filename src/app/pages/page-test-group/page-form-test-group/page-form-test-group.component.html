@@ -1,0 +1,132 @@
+
+<div class="container-fluid pt-5">
+    <div class="nk-content-inner">
+            <div class="nk-block-head nk-block-head-sm ">
+                <div class="nk-block-between">
+                    <div class="nk-block-head-content">
+                       
+
+
+                          <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                              <li class="breadcrumb-item"><a routerLink="/admin/test">Exámenes</a></li>
+                              <li class="breadcrumb-item"><a [routerLink]="['/admin/test/group', this.testId]" >{{test?test.announcement.name:'Convocatoria'}} - {{test?test.name:'Grupo'}} </a></li>
+                              <li class="breadcrumb-item active" aria-current="page">{{id?'Editar':'Nuevo'}} </li>
+                            </ol>
+                          </nav>
+
+
+                    </div>
+                    <div class="nk-block-head-content">
+                        
+
+                    </div>
+                </div>
+            </div>
+            <div class="nk-block">
+                <div class="card">
+                    <div class="card-aside-wrap">
+                        <div class="card-inner card-inner-lg">
+                            <div class="nk-block-head nk-block-head-lg">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                       
+                                        <div class="nk-block-head-content" *ngIf="!id">
+                                            <h4 class="title nk-block-title">Llene los campos</h4>
+                                            <div class="nk-block-des">
+                                                <p>ingrese la información requerida</p>
+                                            </div>
+                                        </div> 
+                
+                                       <div class="nk-block-head-content" *ngIf="id">
+                                            <h4 class="title nk-block-title">Editar</h4>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-6 d-flex justify-content-end">
+                                        
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="nk-block">
+                                <form [formGroup]="testGroupForm" (ngSubmit)="onSubmit()">
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="row gy-4">
+
+                                                <div class="col-sm-6">
+                                                    <mat-form-field>
+                                                        <mat-label>Examen</mat-label>
+                                                        <mat-select  formControlName="test_id" [compareWith]="compareItemsTest" >
+                                                          <mat-option *ngFor="let item of tests" [value]="item.id">
+                                                          (cod - {{item.id}}) {{item.name}} 
+                                                          </mat-option>
+                                                        </mat-select>
+                                                      </mat-form-field>
+                                                </div>
+
+                                                <div class="col-sm-6">
+                                                    <mat-form-field appearance="fill">
+                                                        <mat-label>Nombre</mat-label>
+                                                        <input matInput formControlName="name">
+                                                    </mat-form-field>
+                                                </div>
+
+                                                <div class="col-sm-6">
+                                                    <mat-form-field appearance="fill">
+                                                        <mat-label>Descripción</mat-label>
+                                                        <textarea matInput formControlName="description"></textarea>
+                                                    </mat-form-field>
+                                                </div>
+
+                                                <div class="col-sm-6">
+                                                    <mat-form-field appearance="fill">
+                                                        <mat-label>Nro. de Preguntas</mat-label>
+                                                        <input matInput formControlName="num_questions">
+                                                    </mat-form-field>
+                                                </div>
+
+                                                <div class="col-sm-6">
+                                                    <mat-form-field appearance="fill">
+                                                        <mat-label>Puntaje por pregunta</mat-label>
+                                                        <input matInput formControlName="points_per_question">
+                                                    </mat-form-field>
+                                                </div>
+
+                                                <div class="col-sm-6">
+                                                    <mat-form-field appearance="fill">
+                                                        <mat-label>secuencia de visualización</mat-label>
+                                                        <input matInput formControlName="sequence">
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+                                            <br>
+                                        </div>
+                                    
+                                    </div>
+                                    <br>
+                                    <hr class="preview-hr">
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                        </div>
+                                        <div class="col-md-8 text-lg-end">
+                                            <a [routerLink]="'/admin/test/group/'+ testId" mat-raised-button color="warn"
+                                                class="mx-2">Cancelar</a>
+                                            <button type="submit" mat-raised-button color="primary"> {{this.id?'Guardar  Cambios':'Guardar'}} 
+                                            </button>
+                                        </div>
+                                        <div class="col-md-2">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+

@@ -1,0 +1,47 @@
+<h2 mat-dialog-title>Asignar Instituciones a
+
+    <span *ngIf="employee">
+        {{employee.person.full_name}}
+    </span>
+</h2>
+
+<div>
+    <form [formGroup]="employeeInstitutionForm" (ngSubmit)="onSubmit()">
+        <mat-dialog-content class="mat-typography">
+
+            <mat-form-field>
+                <mat-label>Convocatoria</mat-label>
+                <mat-select formControlName="announcement_id" (selectionChange)="selectionChangeAnnouncement($event)">
+                    <mat-option *ngFor="let item of announcements" [value]="item.id">
+                        {{item.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Instituciones</mat-label>
+                <mat-select formControlName="institution_id">
+                    <mat-option *ngFor="let item of institutions" [value]="item.id">
+                        {{item.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <!-- <mat-label>Convocatoria</mat-label>
+            <mat-select matNativeControl placeholder="Todos" formControlName="announcementId"
+                (selectionChange)="selectionChangeAnnouncement($event)">
+                <mat-option *ngFor="let item of announcements" [value]="item.id">
+                    {{item.name}}
+                </mat-option>
+            </mat-select> -->
+
+        </mat-dialog-content>
+        <hr>
+        <mat-dialog-actions align="end">
+            <button mat-stroked-button color="warn" mat-dialog-close>Cancel</button>
+            <button type="submit" mat-stroked-button color="primary">
+                Guardar Cambios
+            </button>
+        </mat-dialog-actions>
+    </form>
+</div>

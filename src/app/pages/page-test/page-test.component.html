@@ -1,0 +1,87 @@
+<div class="container-fluid pt-5">
+    <div class="nk-content-inner">
+            <div class="nk-block-head nk-block-head-sm ">
+                <div class="nk-block-between">
+                    <div class="nk-block-head-content">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                              <li class="breadcrumb-item active" aria-current="page">Exámenes</li>
+                            </ol>
+                          </nav>
+                    </div>
+                    <div class="nk-block-head-content">
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="nk-block">
+
+                <div class="card">
+                    <div class="card-aside-wrap">
+                        <div class="card-inner card-inner-lg">
+                            <div class="nk-block-head nk-block-head-lg">
+                                <div class="row">
+                                    <div class="col-md-6">
+
+                                    </div>
+                                    <div class="col-md-6 d-flex justify-content-end">
+                                        <a routerLink="/admin/test/create"
+                                            class="toggle btn btn-primary d-none d-md-inline-flex"><em
+                                                class="icon ni ni-plus"></em><span>Registrar Examen</span></a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="nk-block">
+                                <table class="table table-bordered  table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" class="align-middle" >#</th>
+                                            <th scope="col" class="align-middle" >Comvocatoria</th>
+                                            <th scope="col" class="align-middle">Cargo</th>
+                                            <th scope="col" class="align-middle" >Nombre</th>
+                                            <th scope="col" class="align-middle">Descripción</th>
+                                            <th scope="col" class="align-middle" >Fechas (Inicio - Fin)</th>
+                                            <th scope="col" class="align-middle" >Tiempo de duración</th>
+                                            <th scope="col" class="align-middle" >Nro de <br> Intentos</th>
+                                            <th scope="col" class="align-middle text-center">Opc.</th>
+                                            <th scope="col" class="text-center">Grupos y <br> preguntas</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let test of tests; let i=index">
+                                            <th scope="row">{{i+1}}</th>
+                                            <td>{{test.announcement.name}}</td>
+                                            <td>{{test.position.name}}</td>
+                                            <td>{{test.name}}
+                                                
+                                            </td>
+                                            <td>{{test.description}}</td>
+                                            <td>{{test.date_init}} <br> {{test.date_end}}</td>
+                                            <td class="align-middle">{{test.time}} min </td>
+                                            <td class="align-middle" >{{test.num_attemps}}</td>
+                                            <td>
+
+                                                <button mat-icon-button (click)="btnEdit(test)">
+                                                    <mat-icon>edit</mat-icon>
+                                                </button>
+                                                <button mat-icon-button color="warn" (click)="btnDelete(test)">
+                                                    <mat-icon>delete</mat-icon>
+                                                </button>
+
+                                            </td>
+                                            <td class="text-center align-middle">
+                                                <button mat-mini-fab color="primary" (click)="btnTestGroup(test)">
+                                                    <mat-icon>arrow_forward</mat-icon>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>

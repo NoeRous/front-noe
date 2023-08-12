@@ -1,0 +1,196 @@
+<br><br>
+<div class="container-fluid">
+    <div class="nk-content-inner">
+        <div class="nk-block-head nk-block-head-sm ">
+            <div class="nk-block-between">
+                <div class="nk-block-head-content">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                          <li class="breadcrumb-item"><a routerLink="/admin/user" >USUARIOS</a></li>
+                          <li class="breadcrumb-item active" aria-current="page">Nuevo</li>
+                        </ol>
+                      </nav>
+                </div>
+                <div class="nk-block-head-content">
+                    
+                </div>
+            </div>
+        </div>
+
+        <div class="nk-content-body">
+            <div class="nk-block">
+                <div class="nk-block">
+                    <div class="row g-gs">
+                        <div class="col-xxl-10">
+                            <div>
+                                <div class="card">
+                                    <div class="card-inner">
+                                        <h5 class="title nk-block-title">Formulario de Registro de usuario</h5>
+                                        <!-- <div class="nk-block-des">
+                                            <p>Ingrese la información requerida verificando la información ingresada.</p>
+                                        </div> -->
+                                    </div>
+
+                                    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+                                        <div class="row gy-8">
+                                            <div class="row gy-8">
+                                                <div class="col-sm-3">
+                                                    <mat-form-field appearance="fill">
+                                                        <mat-label>Primer Nombre</mat-label>
+                                                        <input matInput formControlName="firts_name">
+                                                    </mat-form-field>
+                                                </div>
+
+                                                <div class="col-sm-3">
+                                                    <mat-form-field appearance="fill">
+                                                        <mat-label>Segundo nombre</mat-label>
+                                                        <input matInput formControlName="second_name">
+                                                    </mat-form-field>
+                                                </div>
+
+                                                <div class="col-sm-3">
+                                                    <mat-form-field appearance="fill">
+                                                        <mat-label>Apellido Paterno</mat-label>
+                                                        <input matInput formControlName="last_name">
+                                                    </mat-form-field>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <mat-form-field appearance="fill">
+                                                        <mat-label>Apellido Materno</mat-label>
+                                                        <input matInput formControlName="mothers_last_name">
+                                                    </mat-form-field>
+                                                </div>
+
+                                            </div>
+                                            <div class="row gy-8">
+                                                <div class="col-sm-3">
+                                                    <mat-form-field  appearance="fill" >
+                                                        <mat-label>Apellido de casada</mat-label>
+                                                        <input matInput formControlName="husband_last_name" >
+                                                    </mat-form-field>
+                                                </div>
+
+                                                <div class="col-sm-3">
+                                                    <mat-form-field  appearance="fill" >
+                                                        <mat-label>Carnet de identidad</mat-label>
+                                                        <input matInput formControlName="identity_card"  >
+                                                    </mat-form-field>
+                                                </div>
+
+                                                <div class="col-sm-3">
+                                                    <mat-form-field appearance="outline" hintLabel="Max 2 caracteres">
+                                                        <mat-label>Complemento de carnet</mat-label>
+                                                        <input matInput #input maxlength="2" placeholder="Ej:1J" formControlName="identity_card_complement">
+                                                        <mat-hint align="end">{{input.value.length}}/2</mat-hint>
+                                                    </mat-form-field>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <mat-form-field appearance="fill">
+                                                        <mat-label>Género</mat-label>
+                                                        <mat-select  formControlName="t_part_gender_id">
+                                                          <mat-option *ngFor="let item of genders" [value]="item.id">
+                                                            {{item.name}}
+                                                          </mat-option>
+                                                        </mat-select>
+                                                      </mat-form-field>                     
+                                                </div>
+                                            </div>
+
+                                            <div class="row gy-8">
+                                                <div class="col-sm-3">
+                                                    <mat-form-field  appearance="fill" >
+                                                        <mat-label>Telefono</mat-label>
+                                                        <input matInput formControlName="phone" >
+                                                    </mat-form-field>
+                                                </div>
+
+                                                <div class="col-sm-3">
+                                                    <mat-form-field  appearance="fill" >
+                                                        <mat-label>Celular</mat-label>
+                                                        <input matInput formControlName="personal_number" >
+                                                    </mat-form-field>
+                                                </div>
+
+                                                <div class="col-sm-3">
+                                                    <mat-form-field appearance="fill" >
+                                                        <mat-label>Fecha de nacimiento</mat-label>
+                                                        <input matInput [matDatepicker]="picker" formControlName="birth_date" >
+                                                        <mat-hint>DD/MM/YYYY</mat-hint>
+                                                        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                                                        <mat-datepicker #picker></mat-datepicker>
+                                                      </mat-form-field> 
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <mat-form-field  appearance="fill" >
+                                                        <mat-label>Correo</mat-label>
+                                                        <input matInput formControlName="email" email >
+                                                    </mat-form-field>
+                                                </div>
+
+                                              
+                                            </div>
+                                            <div class="row gy-8">
+                                                <div class="col-sm-6">
+                                                    <mat-form-field appearance="fill">
+                                                        <mat-label>Dirección</mat-label>
+                                                        <textarea matInput formControlName="address"  ></textarea>
+                                                    </mat-form-field>
+                                                </div>
+
+                                                <div class="col-sm-3">
+                                                    <mat-form-field  appearance="fill" >
+                                                        <mat-label>Cargo</mat-label>
+                                                        <input matInput formControlName="position" >
+                                                    </mat-form-field>
+                                                </div>
+
+                                                <div class="col-sm-3">
+                                                    <mat-form-field>
+                                                        <mat-label>Rol</mat-label>
+                                                        <mat-select  formControlName="role_id">
+                                                          <mat-option *ngFor="let item of roles" [value]="item.id">
+                                                            {{item.name}}
+                                                          </mat-option>
+                                                        </mat-select>
+                                                    </mat-form-field>
+                                                </div>
+
+
+                                               
+
+
+                                                
+                                            </div>
+                                        </div>
+                        
+                        
+                        
+                                        <div class="row ">                   
+                                            <div class="col-sm-12 my-1" style="width: 100%; text-align: right;" >
+                                                <button mat-raised-button color="primary" type="submit" [disabled]="userForm.invalid">Registrar</button>
+                                            </div>
+                                        </div>
+                        
+                                
+                                    </form><!-- form -->
+                
+                                </div>
+                                
+                            </div><!-- .card -->
+                        </div><!-- .col -->
+                        <div class="col-md-6 col-xxl-2">
+                            <!-- <div *ngIf="announcementCurrent" >
+                                <app-card-announcement  [announcement]="announcementCurrent" ></app-card-announcement>
+                            </div> -->
+                            <!-- .card -->
+                        </div><!-- .col -->
+                       <!-- .col -->
+                    </div><!-- .row -->
+                </div>
+
+
+            </div><!-- .nk-block -->
+
+        </div>
+    </div>
+</div>

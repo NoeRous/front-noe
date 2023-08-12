@@ -1,0 +1,91 @@
+<div class="container-fluid pt-5">
+  <div class="nk-content-inner">
+          <div class="nk-block-head nk-block-head-sm ">
+              <div class="nk-block-between">
+                  <div class="nk-block-head-content">
+                      <nav aria-label="breadcrumb">
+                          <ol class="breadcrumb">
+                            <li class="breadcrumb-item active" aria-current="page">Administrar Preguntas y Respuestas</li>
+                          </ol>
+                        </nav>
+                  </div>
+                  <div class="nk-block-head-content">
+                      
+                  </div>
+              </div>
+          </div>
+          <div class="nk-block">
+
+              <div class="card">
+                  <div class="card-aside-wrap">
+                      <div class="card-inner card-inner-sm">
+                          <div class="nk-block-head nk-block-head-sm">
+                              <div class="row">
+                                  <div class="col-md-3">
+                                    <mat-form-field>
+                                      <mat-label>Categoria</mat-label>
+                                      <mat-select [(ngModel)]="categorySelect"  (selectionChange)="changeCategory()" >
+                                          <mat-option *ngFor="let item of questionCategories" [value]="item.id" [compareWith]="compareItemsCategoryD" >
+                                              {{item.name}}
+                                          </mat-option>
+                                      </mat-select>
+                                  </mat-form-field>
+                                  </div>
+                                  <div class="col-md-9 d-flex justify-content-end">
+                                    <div>
+                                      <button (click)="btnCreate()" class=" btn btn-primary "><em
+                                        class="icon ni ni-plus"></em><span>Nueva Pregunta</span></button>
+                                    </div>
+                                  </div>
+                              </div>
+                          </div>
+
+                          <div class="nk-block">
+                              
+                            <div *ngFor="let question of questions; let i=index">
+                              <div class="card">
+                                <div class="card-inner card-inner-sm">
+                                  <div class="row pt-3 pb-3">
+                                    <div class="col-10">
+                                      <h6>{{question.name}}
+                                        <button mat-icon-button (click)="btnEdit(question)">
+                                          <mat-icon>edit</mat-icon>
+                                        </button>
+                                        <button mat-icon-button color="warn" (click)="btnDelete(question)" >
+                                          <mat-icon>delete</mat-icon>
+                                        </button>
+                                      </h6>
+                                      <h6 class="card-subtitle mb-2">{{question.question_category.name}}</h6>
+                                    </div>
+                                    <!-- <div class="col-2" style="text-align: end;">
+                                      <button mat-icon-button (click)="btnEdit(question)">
+                                        <mat-icon>edit</mat-icon>
+                                      </button>
+                                      <button mat-icon-button color="warn" (click)="btnDelete(question)" >
+                                        <mat-icon>delete</mat-icon>
+                                      </button>
+                                    </div> -->
+                                  </div>
+                                    <app-comp-form-question-response 
+                                    [question]="question"
+                                    >
+                                    </app-comp-form-question-response>
+                                </div>
+                              </div>
+                              <br>
+                            </div>
+                           
+              
+                            <div *ngIf="paginateQuestion" class="mt-3" >
+                              <mat-paginator [length]="paginateQuestion.meta.totalItems" (page)="handlePageEvent($event)" [pageSizeOptions]="[10, 50, 100]" aria-label="Select page">
+                              </mat-paginator>
+                            </div>
+
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+  </div>
+</div>
+

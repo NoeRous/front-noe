@@ -1,0 +1,21 @@
+<h2 mat-dialog-title>Enviar la postulación:</h2>
+
+    <form [formGroup]="derivedForm" (ngSubmit)="onSubmit()">
+    <mat-dialog-content class="mat-typography">
+        <mat-form-field>
+            <mat-label>Enviar a Fase</mat-label>
+            <mat-select matNativeControl formControlName="next_phase_id" (selectionChange)="selectionChangeNextPhase($event)">
+            <mat-option *ngFor="let item of nextPhases" [value]="item.nextPhase.id">
+                {{ item.nextPhase.name }}
+            </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </mat-dialog-content>
+    <hr>
+    <mat-dialog-actions align="end">
+      <button mat-stroked-button color="warn" mat-dialog-close>Cancel</button>
+      <button type="submit" mat-stroked-button color="primary"> 
+        Enviar Sig Fase
+       </button>
+    </mat-dialog-actions>
+    </form>

@@ -1,0 +1,125 @@
+<div class="container-fluid mt-5">
+    <div class="nk-content-inner">
+        <div class="nk-block-head-content">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item active" aria-current="page">EMPLEADOS</li>
+                </ol>
+            </nav>
+        </div>
+
+        <div class="nk-block">
+            <div class="card">
+                <div class="card-aside-wrap">
+                    <div class="card-inner card-inner-lg">
+                        <!-- <h5 class="title nk-block-title">Mis Postulaciones</h5> -->
+                        <div class="nk-block-head-content">
+                            <div class="toggle-wrap nk-block-tools-toggle">
+                                <a routerLink="/admin/postulation/create"
+                                    class="btn btn-icon btn-trigger toggle-expand me-n1" data-target="pageMenu"><em
+                                        class="icon ni ni-more-v"></em></a>
+                                <div class="toggle-expand-content" data-content="pageMenu">
+                                    <!-- <br> -->
+                                    <!-- <div style="display: flex; justify-content: flex-end;">
+                                      <button class="btn btn-primary" data-target="addProduct" routerLink="/admin/postulation/create" label="">
+                                          <em class="icon ni ni-plus"></em><span>Registrar</span>
+                                      </button>
+                                  </div> -->
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="card-aside-wrap">
+                            <div>
+                                <div class="nk-block">
+
+                                    <p-table #dt1 [value]="employees" dataKey="id" [rows]="10"
+                                        [showCurrentPageReport]="true" [rowsPerPageOptions]="[10, 25, 50]"
+                                        [loading]="loading" [paginator]="true"
+                                        currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} registros"
+                                        [globalFilterFields]="['name', 'country.name', 'representative.name', 'status']"
+                                        styleClass="p-datatable-sm" [resizableColumns]="true">
+
+                                        <ng-template pTemplate="header">
+                                            <tr>
+                                                <th>Nro.</th>
+                                                <th pSortableColumn="person.full_name" style="width:40%">Nombre Completo
+                                                    <p-sortIcon field="person.full_name"></p-sortIcon>
+                                                </th>
+                                                <th pSortableColumn="person.identity_card" style="width:20%">Carnet de Identidad
+                                                    <p-sortIcon field="person.identity_card"></p-sortIcon>
+                                                </th>
+                                                <th pSortableColumn="position" style="width:30%">Cargo<p-sortIcon
+                                                        field="position"></p-sortIcon></th>
+                                                <th style="width:10%">Instituciones asignadas</th>
+                                                <th style="width:10%">Opciones</th>
+                                            </tr>
+                                            <tr>
+                                                <th>
+                                                </th>
+                                                <th>
+                                                    <p-columnFilter type="text"
+                                                        field="person.full_name"></p-columnFilter>
+                                                </th>
+                                                <th>
+                                                    <p-columnFilter type="text"
+                                                        field="person.identity_card"></p-columnFilter>
+                                                </th>
+                                                <th>
+                                                    <p-columnFilter type="text" field="position"></p-columnFilter>
+                                                </th>
+                                                <th>
+                                                </th>
+                                                <th>
+                                                </th>
+                                            </tr>
+                                        </ng-template>
+                                        <ng-template pTemplate="body" let-employee let-rowIndex="rowIndex">
+                                            <tr [pSelectableRow]="employee">
+
+                                                <td>{{rowIndex + 1}}</td>
+
+                                                <td>
+                                                    <span class="p-column-title">Nombre Completo</span>
+                                                    {{employee.person.full_name}}
+                                                </td>
+                                                <td>
+                                                    <span class="p-column-title">Carnet de Identidad</span>
+                                                    {{employee.person.identity_card}}
+                                                </td>
+                                                <td>
+                                                    <span class="p-column-title">Cargo</span>
+                                                    {{employee.position}}
+                                                </td>
+                                                <td>
+                                                    <span class="p-column-title">Instituciones</span>
+                                                    <ng-container *ngFor="let ei of employee.employeeInstitution">
+                                                        <ul>
+                                                            <li>{{ ei.institution.name }} <br>( {{ ei.announcement.name }})</li>
+                                                        </ul>
+                                                    </ng-container>
+                                                  </td>
+                                                <td style="text-align: center;">
+                                                    <button matTooltip="Asignar Institución" mat-mini-fab color="primary" (click)="btnDialogInstitutions(employee)" >
+                                                        <mat-icon>location_city</mat-icon>
+                                                    </button>
+                    
+                                                </td>
+                                            </tr>
+                                        </ng-template>
+                                        <ng-template pTemplate="emptymessage">
+                                            <tr>
+                                                <td colspan="4">No customers found.</td>
+                                            </tr>
+                                        </ng-template>
+                                    </p-table>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

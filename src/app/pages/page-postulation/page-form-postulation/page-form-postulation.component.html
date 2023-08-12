@@ -1,0 +1,138 @@
+<div class="container-fluid mt-5">
+    <div class="nk-content-inner">
+        <div class="nk-block-head nk-block-head-sm ">
+            <div class="nk-block-between">
+                <div class="nk-block-head-content">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                          <li class="breadcrumb-item"><a routerLink="/admin/postulation" >Mis Postulaciones</a></li>
+                          <li class="breadcrumb-item active" aria-current="page">Nuevo</li>
+                        </ol>
+                      </nav>
+                </div>
+                <div class="nk-block-head-content">
+                    
+                </div>
+            </div>
+        </div>
+
+        <div class="nk-block">
+            <div class="card">
+                <div class="card-aside-wrap">
+                    <div class="card-inner card-inner-sm">
+                        <div class="nk-block-head nk-block-head-sm">
+                            <h5 class="title nk-block-title">Formulario de Postulación</h5>
+                            <div class="nk-block-des">
+                                <p>Ingrese la información requerida verificando la información ingresada.</p>
+                            </div>
+                        </div>
+
+                        <div class="nk-block">
+                            <form [formGroup]="postulacionForm">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                    </div>
+                                    <div class="col-md-12">
+            
+                                        <span class="preview-title-lg overline-title">DATOS POSTULACIÓN</span>
+
+                                        <div class="row gy-4">
+                                            <div class="col-sm-6">
+                                                <mat-form-field>
+                                                    <mat-label>ESFM/UP/UA</mat-label>
+                                                    <mat-select  formControlName="institution_id" (selectionChange)="doSomethingTypePosition($event)" >
+                                                      <mat-option *ngFor="let item of institutions" [value]="item.id">
+                                                         - {{item.name}}
+                                                      </mat-option>
+                                                    </mat-select>
+                                                  </mat-form-field>
+                                            </div>
+                                            <div class="col-sm-6"></div>
+
+                                        </div>
+
+                                        <div class="row gy-4">
+                                           
+                                            <div class="col-sm-6">
+
+                                                <mat-form-field>
+                                                    <mat-label>Tipo Cargo</mat-label>
+                                                    <mat-select  formControlName="position_type_id" (selectionChange)="doSomething($event)" >
+                                                      <mat-option *ngFor="let item of positionsType" [value]="item.id">
+                                                        {{item.name}}
+                                                      </mat-option>
+                                                    </mat-select>
+                                                  </mat-form-field>
+
+                                            </div>
+                                            <div class="col-sm-6">
+
+
+                                                <mat-form-field>
+                                                    <mat-label>Cargo
+                                                        Especialidad</mat-label>
+                                                    <mat-select  formControlName="position_id">
+                                                      <mat-option *ngFor="let item of positions" [value]="item.id">
+                                                        {{item.name}}
+                                                      </mat-option>
+                                                    </mat-select>
+                                                  </mat-form-field>
+
+                                               
+                                            </div>
+                                        </div>
+                                     
+                                        <span class="preview-title-lg overline-title">DATOS DEL PAGO </span>
+                                        <div class="row gy-4 align-center">
+                                            <div class="col-sm-6">
+
+
+
+                                                <mat-form-field appearance="fill">
+                                                    <mat-label>Número de comprobante</mat-label>
+                                                    <input matInput  formControlName="voucher" >
+                                                </mat-form-field>
+
+
+                                            </div>
+                                             <div class="col-sm-6">
+                                                <mat-form-field>
+                                                    <mat-label>Foto comprobante</mat-label>
+                                                    <button mat-icon-button matPrefix (click)="f_input.click()" >
+                                                        <mat-icon>attach_file</mat-icon>
+                                                    </button>
+                                                    <input type="text" readonly matInput formControlName="voucher_url" />
+                                                    <input type="file" multiple hidden #f_input  (change)="handleFileInputChange(f_input.files)" />
+
+                                                </mat-form-field>
+                                            </div> 
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                    </div>
+                                </div>
+                                <hr class="preview-hr">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                    </div>
+                                    <div class="col-md-10 text-lg-end">
+                                        <a routerLink="/admin/postulation" mat-raised-button color="warn" mat-raised-button  class="mx-2">Cancelar</a>
+                                        <button (click)="onSubmit()" mat-raised-button color="primary">Guardar</button>
+                                    </div>
+                                    <div class="col-md-2">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-xxl-2">
+                        <div *ngIf="announcementCurrent" >
+                            <app-card-announcement  [announcement]="announcementCurrent" ></app-card-announcement>
+                        </div>
+                        <!-- .card -->
+                    </div><!-- .col -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,175 @@
+
+<br><br><br>
+<div class="container-fluid">
+    <div class="nk-content-inner">
+        <div class="nk-content-body">
+            <div class="nk-block-head nk-block-head-sm">
+                <div class="nk-block-between">
+                    <div class="nk-block-head-content">
+                        <h5 class="nk-block-title page-title">Instituciones y Cargos</h5>
+                    </div><!-- .nk-block-head-content -->
+                    <div class="nk-block-head-content">
+                        <div class="toggle-wrap nk-block-tools-toggle">
+                            <a href="#" class="btn btn-icon btn-trigger toggle-expand me-n1" data-target="pageMenu"><em class="icon ni ni-more-v"></em></a>
+                            <div class="toggle-expand-content" data-content="pageMenu">
+                                <br>
+                                <ul class="nk-block-tools g-3">
+                                    <li class="nk-block-tools-opt">
+                                        <a routerLink="/admin/announcement-institution-position/create" data-target="addProduct" class="toggle btn btn-primary d-none d-md-inline-flex">
+                                            <em class="icon ni ni-plus"></em>
+                                            <span>Registrar</span>
+                                        </a>
+                                        
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div><!-- .nk-block-head-content -->
+                </div><!-- .nk-block-between -->
+            </div><!-- .nk-block-head -->
+            <div class="nk-block">
+                <div class="card">
+                    <div class="row p-3">
+                        <!-- <div class="col-sm-2">
+                            <form [formGroup]="announcementSelectForm" >
+
+                            <mat-form-field>
+                                <mat-label>Convocatoria</mat-label>
+                                <mat-select matNativeControl  placeholder="Todos" formControlName="announcementId" (selectionChange)="selectionChangeAnnouncement($event)" >
+                                  <mat-option *ngFor="let item of announcements" [value]="item.id">
+                                    {{item.name}}
+                                  </mat-option>
+                                </mat-select>
+                              </mat-form-field>
+
+                            </form>
+
+                        </div> -->
+                    </div>
+
+                    <div class="nk-block">
+                        <div class="card">
+                                <p-table #dt1
+                                [value]="announcementInstitutionPositions"
+                                dataKey="id"
+                                [rows]="10"
+                                [showCurrentPageReport]="true"
+                                [rowsPerPageOptions]="[10, 25, 50]"
+                                
+                                [paginator]="true"
+                                currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} registros"
+                                [globalFilterFields]="['name', 'country.name', 'representative.name', 'status']"
+                                styleClass="p-datatable-sm"
+                                [resizableColumns]="true"
+                                >
+                                
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th style="width: 5%">Nro.</th>
+                                        <th pSortableColumn="institutionPosition.institution.name" style="width:30%">Institución <p-sortIcon field="institutionPosition.institution.name"></p-sortIcon></th>
+                                        <th pSortableColumn="institutionPosition.position.name" style="width:30%">Cargo <p-sortIcon field="institutionPosition.position.name"></p-sortIcon></th>
+                                        <th pSortableColumn="announcement.name" style="width:25%">Convocatoria <p-sortIcon field="announcement.name"></p-sortIcon></th>
+                                        <th  style="width:10%">Opciones</th>
+                                    </tr>
+                                  <tr>
+                                    <th>
+                                    </th>
+                                    <th>
+                                        <p-columnFilter type="text" field="institutionPosition.institution.name"></p-columnFilter>
+                                    </th>
+                                    <th>
+                                      <p-columnFilter type="text" field="institutionPosition.position.name"></p-columnFilter>
+                                    </th>
+                                    <th>
+                                      <p-columnFilter type="text" field="announcement.name"></p-columnFilter>
+                                    </th>
+                                  </tr>
+                                    
+                                </ng-template>
+                                <ng-template pTemplate="body" let-announcementInstitutionPosition let-rowIndex="rowIndex">
+                                    <tr [pSelectableRow]="announcementInstitutionPosition" >
+                  
+                                        <td>{{rowIndex + 1}}</td>
+                                      
+                                        <td>
+                                            <span class="p-column-title">Name</span>
+                                            {{announcementInstitutionPosition.institutionPosition.institution.name}}
+                                        </td>
+                                        <td>
+                                            <span class="p-column-title">Name</span>
+                                            {{announcementInstitutionPosition.institutionPosition.position.name}}
+                                        </td>
+                                        <td>
+                                            <span class="p-column-title">Name</span>
+                                            {{announcementInstitutionPosition.announcement.name }}
+                                        </td>
+                                       <td>
+                                        <button mat-icon-button  (click)="btnEdit(announcementInstitutionPosition)" >
+                                            <mat-icon>edit</mat-icon>
+                                          </button>
+                                          <button mat-icon-button color="warn" (click)="btnDelete(announcementInstitutionPosition)" >
+                                            <mat-icon>delete</mat-icon>
+                                          </button>
+                                      </td>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="emptymessage">
+                                    <tr>
+                                        <td colspan="4">No customers found.</td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                        </div>
+
+                    </div>
+               
+                    
+                    <!-- <table class="table table-bordered">
+                        <thead>
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Institución</th>
+                            <th scope="col">Cargo</th>
+                            <th scope="col">Convocatoria</th>
+                      
+                            <th scope="col">Opc.</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let announcementInstitutionPosition of announcementInstitutionPositions; let i=index" >
+                            <th scope="row">{{i+1}}</th>
+                            <td>{{announcementInstitutionPosition.institutionPosition.institution.name}}
+                                <br>
+                                <span class="badge rounded-pill bg-outline-info">{{announcementInstitutionPosition.institutionPosition.institution.t_par_institution_type.name}}</span>
+                                 
+                            </td>
+                            <td>
+                                {{announcementInstitutionPosition.institutionPosition.position.name}}
+
+                            </td>
+                            
+                            <td>
+                                {{announcementInstitutionPosition.announcement.name}}
+                            </td>
+                            <td>
+                                <button mat-icon-button  (click)="btnEdit(announcementInstitutionPosition)" >
+                                    <mat-icon>edit</mat-icon>
+                                  </button>
+                                  <button mat-icon-button color="warn" (click)="btnDelete(announcementInstitutionPosition)" >
+                                    <mat-icon>delete</mat-icon>
+                                  </button>
+                            </td>
+                          </tr>
+                        
+                        </tbody>
+                      </table> -->
+
+                </div>
+            </div><!-- .nk-block -->
+        </div>
+    </div>
+</div>
+    
+
+               
+

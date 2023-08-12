@@ -1,0 +1,54 @@
+//@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/themes/mdc-light-indigo/theme.css";
+@import "primeng/resources/primeng.css";
+@import "primeicons/primeicons.css";
+/* You can add global styles to this file, and also import other style files */
+mat-form-field{
+    width: 100%;
+}
+
+.cdk-overlay-container {
+    z-index: 9999 !important;
+}
+
+.green-snackbar {
+    background: rgb(65, 252, 134);
+    color: white;
+}.green-snackbar button {
+    background-color: rgb(65, 252, 134);
+    color: white;
+    border: none;
+}
+
+
+
+  .mat-mdc-snack-bar-container {
+    &.blue-snackbar {
+      --mdc-snackbar-container-color: #f8dbe0;
+      --mat-mdc-snack-bar-button-color: #fff;
+      --mdc-snackbar-supporting-text-color: #842e3c;
+    }
+  }
+
+  td {
+    font-size: 12px !important;
+  }
+  
+  th {
+    font-size: 12px !important;
+  }
+  
+  tr {
+    font-size: 12px !important;
+  }
+
+  html {
+    size: 12px !important;
+    //font-size: 10px !important;
+    //transform: scale(0.8)
+  }
+
+  body {
+    margin: 0;
+    font-family: var(--font-family) !important;
+  }

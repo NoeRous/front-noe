@@ -1,0 +1,48 @@
+<div class="container-fluid pt-5">
+    <div class="nk-content-inner">
+            <div class="nk-block-head nk-block-head-sm ">
+                <div class="nk-block-between">
+                    <div class="nk-block-head-content">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                              <li class="breadcrumb-item active" aria-current="page">Administrar Roles y menus</li>
+                            </ol>
+                          </nav>
+                    </div>
+                    <div class="nk-block-head-content">
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="nk-block">
+  
+                <div class="card">
+                    <div class="card-aside-wrap">
+                        <div class="card-inner card-inner-lg">
+                            
+  
+                            <div class="nk-block ">
+                                
+                                <div class="row">
+                                    <div class="col-md-4 panel-role">
+                                       <app-comp-role  (newItemEvent)="addItem($event)"></app-comp-role>
+                                    </div>
+                                    <div class="col-md-8 panel-menus">
+
+                                            <div *ngIf="role" >
+                                                <app-comp-menu  [role]="role" ></app-comp-menu>
+                                            </div>
+                                        
+                                    </div>
+
+                                </div>
+  
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+  </div>
+  
+  

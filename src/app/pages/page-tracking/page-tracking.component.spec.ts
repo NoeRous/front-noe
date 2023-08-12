@@ -1,0 +1,21 @@
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { PageTrackingComponent } from './page-tracking.component';
+
+describe('PageTrackingComponent', () => {
+  let component: PageTrackingComponent;
+  let fixture: ComponentFixture<PageTrackingComponent>;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      declarations: [PageTrackingComponent]
+    });
+    fixture = TestBed.createComponent(PageTrackingComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

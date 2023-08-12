@@ -1,0 +1,164 @@
+<div class="container-fluid mt-5">
+    <div class="nk-content-inner">
+        <div class="nk-block-head-content">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item active" aria-current="page">Mi bandeja</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="nk-block">
+            <div class="card">
+                <div class="col-sm-6 col-lg-4 col-xxl-3">
+                    <div class="card-inner">
+                        <h6>Mi bandeja</h6>
+                        <ul class="nk-block-tools g-3">
+                            <li>
+
+                                <form [formGroup]="announcementSelectForm">
+                                    <mat-form-field>
+                                        <mat-label>Convocatoria</mat-label>
+                                        <mat-select matNativeControl placeholder="Todos"
+                                            formControlName="announcementId"
+                                            (selectionChange)="selectionChangeAnnouncement($event)">
+                                            <mat-option *ngFor="let item of announcements" [value]="item.id">
+                                                {{item.name}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </form>
+
+                            </li>
+                            <li>
+
+                                <form [formGroup]="announcementSelectForm">
+                                    <mat-form-field>
+                                        <mat-label>Instituciones</mat-label>
+                                        <mat-select matNativeControl placeholder="Todos" formControlName="institutionId"
+                                            (selectionChange)="selectionChangeInstitution($event)">
+                                            <mat-option [value]="">Todos</mat-option>
+                                            <mat-option *ngFor="let item of employeeInstitutions"
+                                                [value]="item.institution.id">
+                                                {{item.institution.name}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </form>
+
+                            </li>
+                            <li>
+
+                                <form [formGroup]="announcementSelectForm">
+                                    <mat-form-field>
+                                        <mat-label>Cargos</mat-label>
+                                        <mat-select matNativeControl placeholder="Todos" formControlName="institutionId"
+                                            (selectionChange)="selectionChangeInstitution($event)">
+                                            <mat-option [value]="">Todos</mat-option>
+                                            <mat-option *ngFor="let item of employeeInstitutions"
+                                                [value]="item.institution.id">
+                                                {{item.institution.name}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </form>
+
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="nk-block">
+                <p-table #dt1 [value]="postulations" selectionMode="single" [showCurrentPageReport]="true" dataKey="id"
+                    [rows]="12" responsiveLayout="stack" [showCurrentPageReport]="true"
+                    [rowsPerPageOptions]="[10, 25, 50]" [loading]="loading" [paginator]="true"
+                    currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} registros"
+                    [tableStyle]="{ 'min-width': '20rem','max-width': '100rem'}" [rowHover]="true"
+                    [styleClass]="'p-datatable-sm'"
+                    [globalFilterFields]="['institution_name','position_type_name','position_name','voucher','current_phase_name']">
+                    <ng-template pTemplate="caption">
+                        <div style="display: flex; justify-content: flex-end;">
+                            <span class="p-input-icon-left ml-auto">
+                                <i class="pi pi-search"></i>
+                                <input class="p-inputtext-sm" pInputText type="text"
+                                    (input)="dt1.filterGlobal($any($event.target).value, 'contains')"
+                                    placeholder="Búsqueda" />
+                            </span>
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Nro.</th>
+                            <th pSortableColumn="institution_name" style="width:15%">ESFM/UP/UA <p-sortIcon
+                                    field="institution_name"></p-sortIcon></th>
+                            <th pSortableColumn="position_type_name" style="width:15%">Tipo de cargo <p-sortIcon
+                                    field="position_type_name"></p-sortIcon></th>
+                            <th pSortableColumn="position_name" style="width:15%">Cargo <p-sortIcon
+                                    field="position_name"></p-sortIcon></th>
+                            <th pSortableColumn="voucher" style="width:15%">Nro Comprobante <p-sortIcon
+                                    field="voucher"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="created_at" style="width:15%">Nombre postulante <p-sortIcon
+                                    field="created_at"></p-sortIcon></th>
+                            <th pSortableColumn="current_phase_name" style="width:15%">Carnet<p-sortIcon
+                                    field="current_phase_name"></p-sortIcon></th>
+                        
+                            <th style="width:10%">Opciones</th>
+                        </tr>
+
+                    </ng-template>
+                    <ng-template pTemplate="body" let-postulation let-rowIndex="rowIndex">
+                        <tr [pSelectableRow]="postulation">
+
+                            <td>
+                                <span class="p-column-title">Nro.:</span>
+
+                                {{rowIndex + 1}}
+                            </td>
+
+                            <td>
+                                <span class="p-column-title">ESFM/UP/UA:</span>
+                                {{postulation.institution_name}}
+                            </td>
+                            <td>
+                                <span class="p-column-title">Tipo de cargo:</span>
+                                {{postulation.position_type_name}}
+                            </td>
+                            <td>
+                                <span class="p-column-title">Cargo:</span>
+                                {{postulation.position_name}}
+                                <br>
+                                <span
+                                    class="badge rounded-pill bg-outline-info">{{postulation.announcement_name}}</span>
+                            </td>
+                            <td>
+                                <span class="p-column-title">Nro.Comprobante:</span>
+                                {{postulation.voucher}}
+                                <a target="_blank" [attr.href]="urlUpload+postulation.voucher_url">(Ver)</a>
+                            </td>
+                            <td>
+                                <span class="p-column-title">Nombre postulante:</span>
+                                {{postulation.person_firts_name +' '+postulation.person_second_name+' '+postulation.person_last_name+' '+postulation.person_mothers_last_name+' '+postulation.person_husband_last_name}}
+                            </td>
+                            <td>
+                                <span class="p-column-title">Carnet:</span>
+                                {{postulation.person_identity_card}}
+
+                            </td>
+                            <td style="text-align: center;">
+                                <button matTooltip="Enviar Sig. Fase" mat-mini-fab color="primary" (click)="btnDialogDerived(postulation)" >
+                                    <mat-icon>send</mat-icon>
+                                </button> 
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage">
+                        <tr>
+                            <td colspan="8">No se encontraron datos.</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

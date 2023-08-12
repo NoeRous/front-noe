@@ -1,0 +1,194 @@
+<div class="nk-split nk-split-page nk-split-lg">
+    <div class="nk-split-content nk-block-area nk-block-area-column nk-auth-container bg-white w-lg-45" style="width: 55% !important;" >
+        <div class="absolute-top-right d-lg-none p-3 p-sm-5">
+            <a href="#" class="toggle btn btn-white btn-icon btn-light" data-target="athPromo"><em class="icon ni ni-info"></em></a>
+        </div>
+        <div class="nk-block nk-block-middle nk-auth-body" style="max-width: 620px !important;" >
+            <div class="brand-logo pb-5">
+                <a routerLink="/admin/dashboard" class="logo-link">
+                    <img class="logo-light logo-img logo-img-lg" src="./assets/images/logo2x.png" srcset="./assets/images/logo2x.png 2x" alt="logo">
+                    <img class="logo-dark logo-img logo-img-lg" src="./assets/images/logo-dark2x.png" srcset="./assets/images/logo-dark2x.png 2x" alt="logo-dark">
+                </a>
+            </div>
+            <div class="nk-block-head">
+                <div class="nk-block-head-content">
+                    <h5 class="nk-block-title">Registro de postulante</h5>
+                    <div class="nk-block-des">
+                        <p>Crear nueva cuenta de postulante</p>
+                    </div>
+                </div>
+            </div><!-- .nk-block-head -->
+            <form [formGroup]="personForm" (ngSubmit)="onSubmit()">
+                <div class="row gy-4">
+                    <div class="col-sm-6">
+
+                        <mat-form-field  appearance="outline" >
+                            <mat-label>Primer Nombre</mat-label>
+                            <input matInput formControlName="firts_name" >
+                        </mat-form-field>
+
+                        
+                    </div>
+                    <div class="col-sm-6"> 
+
+                        <mat-form-field  appearance="outline" >
+                            <mat-label>Segundo Nombre</mat-label>
+                            <input matInput formControlName="second_name" >
+                        </mat-form-field>
+
+
+                    </div>
+                </div>
+
+                <div class="row gy-4">
+                    <div class="col-sm-6">
+                        <mat-form-field  appearance="outline" >
+                            <mat-label>Apellido Paterno</mat-label>
+                            <input matInput formControlName="last_name" >
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-6">
+                        <mat-form-field  appearance="outline" >
+                            <mat-label>Apellido Materno</mat-label>
+                            <input matInput formControlName="mothers_last_name" >
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row gy-4">
+                    <div class="col-sm-6">
+                        <mat-form-field  appearance="outline" >
+                            <mat-label>Apellido de casada</mat-label>
+                            <input matInput formControlName="husband_last_name" >
+                        </mat-form-field>    
+                    </div>
+                    <div class="col-sm-6">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Género</mat-label>
+                            <mat-select  formControlName="t_part_gender_id">
+                              <mat-option *ngFor="let item of genders" [value]="item.id">
+                                {{item.name}}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>                     
+                    </div>
+                </div>
+
+                <div class="row gy-4">
+                     <div class="col-sm-6">
+                        <mat-form-field  appearance="outline" >
+                            <mat-label>Número de carnet</mat-label>
+                            <input matInput formControlName="identity_card">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-6">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Complemento de carnet</mat-label>
+                            <input matInput #input maxlength="2" placeholder="Ej:1J" formControlName="identity_card_complement">
+                            <mat-hint align="end">{{input.value.length}}/2</mat-hint>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="row gy-4">
+                    <div class="col-sm-6">
+                        <mat-form-field  appearance="outline" >
+                            <mat-label>Correo</mat-label>
+                            <input matInput formControlName="email" email >
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-6">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Dirección</mat-label>
+                            <textarea matInput formControlName="address"  ></textarea>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="row gy-4">
+                    <div class="col-sm-6">
+                        <mat-form-field  appearance="outline" >
+                            <mat-label>Telefono</mat-label>
+                            <input matInput formControlName="phone" >
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-6">
+                        <mat-form-field  appearance="outline" >
+                            <mat-label>Celular</mat-label>
+                            <input matInput formControlName="personal_number" >
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="row gy-4">
+                    <div class="col-sm-6">
+                        <mat-form-field appearance="outline" >
+                            <mat-label>Fecha de nacimiento</mat-label>
+                            <input matInput [matDatepicker]="picker" formControlName="birth_date" >
+                            <mat-hint>DD/MM/YYYY</mat-hint>
+                            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                          </mat-form-field>                        
+                    </div>
+                    <div class="col-sm-6">
+                        <mat-form-field  appearance="outline" >
+                            <mat-label>RDA</mat-label>
+                            <input matInput formControlName="rda_number" >
+                        </mat-form-field>
+                    </div>
+                </div>
+
+
+                <div class="row ">                   
+                    <div class="col-sm-12 my-1" style="width: 100%; text-align: right;" >
+                        <button mat-raised-button color="primary" type="submit" [disabled]="personForm.invalid">Registrar</button>
+                    </div>
+                </div>
+
+        
+            </form><!-- form -->
+            <div class="form-note-s2 pt-4"> Ya tienes una cuenta ? <a routerLink="/auth/login"><strong>Iniciar sesión</strong></a>
+            </div>
+        </div><!-- .nk-block -->
+        <div class="nk-block nk-auth-footer">
+            <div class="nk-block-between">
+                <ul class="nav nav-sm">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Terminos y Condiciones</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Política de privacidad</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Ayuda</a>
+                    </li>
+                </ul><!-- nav -->
+            </div>
+            <div class="mt-3">
+                <p>&copy; 2023 Ministerio de Educación.</p>
+            </div>
+        </div><!-- nk-block -->
+    </div><!-- nk-split-content -->
+    <div class="nk-split-content nk-split-stretch bg-lighter d-flex toggle-break-lg toggle-slide toggle-slide-right" data-toggle-body="true" data-content="athPromo" data-toggle-screen="lg" data-toggle-overlay="true">
+        <div class="slider-wrap w-100 w-max-550px p-3 p-sm-5 m-auto">
+            <div class="slider-init" data-slick='{"dots":true, "arrows":false}'>
+                <div class="slider-item">
+                    <div class="nk-feature nk-feature-center">
+                        <div class="nk-feature-img">
+                            <img class="round" src="./assets/images/slides/promo-a.png" srcset="./images/slides/promo-a2x.png 2x" alt="">
+                        </div>
+                        <div class="nk-feature-content py-4 p-sm-5">
+                            <h4>Comvocatoria</h4>
+                            <p>Comvocatoria 2023</p>
+                        </div>
+                    </div>
+                </div><!-- .slider-item -->
+            </div><!-- .slider-init -->
+            <div class="slider-dots"></div>
+            <div class="slider-arrows"></div>
+        </div><!-- .slider-wrap -->
+    </div><!-- nk-split-content -->
+</div>
+
+<script src="./assets/js/bundle.js?ver=3.1.3"></script>
+<script src="./assets/js/scripts.js?ver=3.1.3"></script>
+<script src="./assets/js/libs/tagify.js?ver=3.1.3"></script>

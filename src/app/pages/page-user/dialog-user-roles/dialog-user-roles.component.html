@@ -1,0 +1,32 @@
+<h2 mat-dialog-title>Asignar Rol a 
+
+<span *ngIf="user" >
+  {{user.person.firts_name}} {{user.person.second_name}} {{user.person.last_name}} {{user.person.mothers_last_name}}
+</span>
+
+</h2>
+<form [formGroup]="rolUserForm" (ngSubmit)="onSubmit()">
+<mat-dialog-content class="mat-typography">
+  <h3 *ngIf="user" >Usuario:  {{user.username}} </h3>
+
+
+  <label id="example-radio-group-label">Seleccione un Rol:</label>
+
+  <mat-radio-group
+  aria-labelledby="example-radio-group-label"
+  class="example-radio-group" formControlName="role_id"
+  >
+  <mat-radio-button class="example-radio-button" *ngFor="let role of roles" [value]="role.id">
+    {{role.name}}
+  </mat-radio-button>
+</mat-radio-group>
+
+</mat-dialog-content>
+<hr>
+<mat-dialog-actions align="end">
+  <button mat-stroked-button color="warn" mat-dialog-close>Cancel</button>
+  <button type="submit" mat-stroked-button color="primary"> 
+    Guardar Cambios
+   </button>
+</mat-dialog-actions>
+</form>

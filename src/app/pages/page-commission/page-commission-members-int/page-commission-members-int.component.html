@@ -1,0 +1,98 @@
+<div class="container-fluid">
+    <div class="nk-content-inner">
+      <div class="nk-block">
+        <div class="card">
+            <div class="card-aside-wrap">
+                <div class="card-inner card-inner-sm">
+                    <div class="nk-block-head nk-block-head-sm" style="display: flex; justify-content: space-between; align-items: center;">
+                      <h6>Integrantes Comisión Ministerio de Educación</h6>
+                      <div>
+                        <!-- <button class="btn btn-primary" data-target="addProduct" routerLink="/admin/postulation/create" label="">
+                          <em class="icon ni ni-plus"></em><span>Registrar</span>
+                        </button> -->
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="nk-block"> -->
+              <p-table #dt1 [value]="commissionInternals" selectionMode="single" [showCurrentPageReport]="true" dataKey="id"
+                [rows]="12" responsiveLayout="stack" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10, 25, 50]"
+                [loading]="loading" [paginator]="false"
+                currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} registros"
+                [tableStyle]="{ 'min-width': '20rem','max-width': '100rem'}" [rowHover]="true" [styleClass]="'p-datatable-gridlines p-datatable-sm'"
+                [globalFilterFields]="['person.firts_name']">
+                <!-- <ng-template pTemplate="caption">
+                  <div style="display: flex; justify-content: flex-end;">
+                    <span class="p-input-icon-left ml-auto">
+                      <i class="pi pi-search"></i>
+                      <input class="p-inputtext-sm" pInputText type="text"
+                        (input)="dt1.filterGlobal($any($event.target).value, 'contains')" placeholder="Búsqueda" />
+                    </span>
+                  </div>
+                </ng-template> -->
+                <ng-template pTemplate="header">
+                  <tr>
+                    <th style="width:10%">Nro.</th>
+                    <th pSortableColumn="person.firts_name" style="width:15%">Nombre Completo <p-sortIcon
+                        field="person.firts_name"></p-sortIcon></th>
+                    <th pSortableColumn="person.identity_card" style="width:15%">Carnet<p-sortIcon
+                        field="person.identity_card"></p-sortIcon></th>
+                    <th pSortableColumn="name_role" style="width:15%">Asignado(a) <p-sortIcon
+                        field="name_role"></p-sortIcon></th>
+                        <th pSortableColumn="person.personal_number" style="width:15%">Número de Celular<p-sortIcon
+                          field="person.personal_number"></p-sortIcon></th>
+                    <th style="width:10%">Opciones</th>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-commissionInternal let-rowIndex="rowIndex">
+                  <tr [pSelectableRow]="commissionInternal">
+      
+                    <td>
+                      <span class="p-column-title">Nro.:</span>
+      
+                      {{rowIndex + 1}}
+                    </td>
+      
+                    <td>
+                      <span class="p-column-title">Nombre Completo:</span>
+                      {{commissionInternal.person.firts_name}}  {{commissionInternal.person.second_name}} {{commissionInternal.person.last_name}} {{commissionInternal.person.mothers_last_name}} {{commissionInternal.person.husband_last_name}}
+                    </td>
+                    <td>
+                      <span class="p-column-title">Carnet:</span>
+                      {{commissionInternal.person.identity_card_complement ? commissionInternal.person.identity_card +'-'+ commissionInternal.person.identity_card_complement :commissionInternal.person.identity_card }}
+                
+                    </td>
+                    <td>
+                      <span class="p-column-title">Asignado(a):</span>
+                      {{commissionInternal.name_role}}
+                    </td>
+                    <td>
+                      <span class="p-column-title">Número de Celular:</span>
+                      {{commissionInternal.person.personal_number}}
+                    </td>
+                    <td style="text-align: center;">
+                      <!-- <span class="p-column-title">Opciones:</span>
+                      <button mat-mini-fab color="primary" [matMenuTriggerFor]="menu" (click)="getPhases()">
+                        <mat-icon>more_vert</mat-icon>
+                      </button>
+                      <mat-menu #menu="matMenu" xPosition="before">
+                        <button mat-menu-item *ngFor="let item of phases"
+                          (click)="btnVerifyPhasePostulation(postulation,item)">
+                          <mat-icon>{{ item.icon_action }}</mat-icon>
+                          <span>{{ item.name_action }}</span>
+                        </button>
+                      </mat-menu> -->
+                    </td>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                  <tr>
+                    <td colspan="10">No se encontraron datos.</td>
+                  </tr>
+                </ng-template>
+              </p-table>
+            <!-- </div> -->
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,168 @@
+<div class="container-fluid pt-5">
+    <div class="nk-content-inner">
+        <div class="nk-block-head nk-block-head-sm ">
+            <div class="nk-block-between">
+                <div class="nk-block-head-content">
+
+
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a routerLink="/admin/test">Exámenes</a></li>
+                            <li class="breadcrumb-item"><a
+                                    [routerLink]="['/admin/test/group', this.testId]">{{test?test.announcement.name:'Convocatoria'}}
+                                    - {{test?test.name:'Grupo'}} </a></li>
+                            <li class="breadcrumb-item active" aria-current="page"> {{testGroup?testGroup.name:'grupo'}}
+                            </li>
+                        </ol>
+                    </nav>
+
+                </div>
+                <div class="nk-block-head-content">
+
+                </div>
+            </div>
+        </div>
+        <div class="nk-block">
+            <div class="card">
+                <div class="card-aside-wrap">
+                    <div class="card-inner card-inner-lg">
+                        <div class="nk-block-head nk-block-head-lg">
+                            <div class="row">
+                                <div class="col-md-6">
+
+                                    Agregar Preguntas
+
+                                </div>
+                                <div class="col-md-6 d-flex justify-content-end">
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="nk-block">
+
+
+                            <div class="row">
+                                <div class="col-md-6" style="background: rgb(252, 252, 252); border-radius: 15px;">
+
+                                    <div class="row mb-0 mt-3">
+                                        <div class="col-md-6">
+                                            <strong>GRUPO: </strong> {{testGroup?testGroup.name:'grupo'}}
+                                        </div>
+                                        <div class="col-md-6">
+                                        </div>
+                                    </div>
+                                    <br>
+
+                                    <div class="nk-tb-list">
+                                        <div class="nk-tb-item nk-tb-head">
+                                            <div class="nk-tb-col tb-col-sm">
+                                                <button (click)="btnDelete()"
+                                                    class=" btn btn-primary btn-sm  d-md-inline-flex"><span>{{countRemoveQuestion}}</span><em
+                                                        class="icon ni ni-arrow-right"></em></button>
+
+                                            </div>
+                                            <div class="nk-tb-col tb-col-sm"><span>Pregunta</span></div>
+                                            <div class="nk-tb-col"><span>Categoria</span></div>
+                                            <div class="nk-tb-col"><span>Respuestas</span></div>
+                                            <div class="nk-tb-col nk-tb-col-tools">
+
+                                            </div>
+                                        </div><!-- .nk-tb-item -->
+                                        <div class="nk-tb-item" *ngFor="let item of testGroupQuestions; let i=index">
+                                            <div class="nk-tb-col nk-tb-col-check">
+                                                <div class="custom-control custom-control-sm custom-checkbox notext">
+                                                    <input (click)="removeQuestion(item.question)" type="checkbox"
+                                                        class="custom-control-input" [attr.id]="'g'+item.id">
+                                                    <label class="custom-control-label"
+                                                        [attr.for]="'g'+item.id"></label>
+                                                </div>
+                                            </div>
+                                            <div class="nk-tb-col tb-col-sm">
+                                                <span class="tb-product">
+                                                    <img [attr.src]="'https://source.unsplash.com/random/100x100?sig='+item.id"
+                                                        alt="" class="thumb">
+                                                    <span class="title">{{item.question.name}}</span>
+                                                </span>
+                                            </div>
+                                            <div class="nk-tb-col">
+                                                <span class="tb-sub">{{item.question.question_category.name}}</span>
+                                            </div>
+                                            <div class="nk-tb-col">
+                                                <button class=" btn btn-icon btn-trigger"><em
+                                                        class="icon ni ni-list"></em></button>
+                                            </div>
+
+                                            <div class="nk-tb-col nk-tb-col-tools">
+
+                                            </div>
+                                        </div><!-- .nk-tb-item -->
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="row mb-0 mt-3">
+                                        <div class="col-md-6">
+                                            Todas las preguntas
+                                        </div>
+                                        <div class="col-md-6">
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="nk-msg-list">
+                                        <div class="nk-tb-list">
+                                            <div class="nk-tb-item nk-tb-head">
+                                                <div class="nk-tb-col nk-tb-col-check">
+                                                    <button (click)="btnAdd()"
+                                                        class=" btn btn-primary btn-sm  d-md-inline-flex"><em
+                                                            class="icon ni ni-arrow-left"></em><span>{{countAddQuestion}}</span></button>
+
+                                                </div>
+                                                <div class="nk-tb-col tb-col-sm"><span>Pregunta</span></div>
+                                                <div class="nk-tb-col"><span>Categoria</span></div>
+                                                <div class="nk-tb-col"><span>Respuestas</span></div>
+                                                <div class="nk-tb-col nk-tb-col-tools">
+
+                                                </div>
+                                            </div><!-- .nk-tb-item -->
+                                            <div class="nk-tb-item" *ngFor="let question of questions; let i=index">
+                                                <div class="nk-tb-col nk-tb-col-check">
+                                                    <div
+                                                        class="custom-control custom-control-sm custom-checkbox notext">
+                                                        <input (click)="addQuestion(question)" type="checkbox"
+                                                            class="custom-control-input" [attr.id]="'p'+question.id">
+                                                        <label class="custom-control-label"
+                                                            [attr.for]="'p'+question.id"></label>
+                                                    </div>
+                                                </div>
+                                                <div class="nk-tb-col tb-col-sm">
+                                                    <span class="tb-product">
+                                                        <img [attr.src]="'https://source.unsplash.com/random/100x100?sig='+question.id"
+                                                            alt="" class="thumb">
+                                                        <span class="title">{{question.name}}</span>
+                                                    </span>
+                                                </div>
+                                                <div class="nk-tb-col">
+                                                    <span class="tb-sub">{{question.question_category.name}}</span>
+                                                </div>
+                                                <div class="nk-tb-col">
+                                                    <button class=" btn btn-icon btn-trigger"
+                                                        (click)="btnListResponses(question)"><em
+                                                            class="icon ni ni-list"></em></button>
+                                                </div>
+
+                                                <div class="nk-tb-col nk-tb-col-tools">
+
+                                                </div>
+                                            </div><!-- .nk-tb-item -->
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

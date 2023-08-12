@@ -1,0 +1,137 @@
+<div class="container-fluid pt-5">
+    <div class="nk-content-inner">
+        <div class="nk-content-body">
+            <div class="nk-block">
+                <div class="card">
+                    <div class="card-aside-wrap">
+                        <div class="card-inner card-inner-lg">
+                            <div class="nk-block-head nk-block-head-lg">
+                                <div class="nk-block-between">
+                                    <div class="nk-block-head-content">
+                                        <h4 class="nk-block-title">Información personal</h4>
+                                        <div class="nk-block-des">
+                                            <p>Verifique sus datos</p>
+                                        </div>
+                                    </div>
+                                    <div class="nk-block-head-content align-self-start d-lg-none">
+                                        <a href="#" class="toggle btn btn-icon btn-trigger mt-n1" data-target="userAside"><em class="icon ni ni-menu-alt-r"></em></a>
+                                    </div>
+                                </div>
+                            </div><!-- .nk-block-head -->
+                            <div class="nk-block">
+                                <div class="nk-data data-list" *ngIf="person" >
+                                    <div class="data-head">
+                                        <h6 class="overline-title">Información básica</h6>
+                                    </div>
+                                    <div class="data-item" data-bs-toggle="modal" data-bs-target="#profile-edit">
+                                        <div class="data-col">
+                                            <span class="data-label">Nombres</span>
+                                            <span class="data-value">{{person.firts_name}}  {{person.second_name}}</span>
+                                        </div>
+                                        <div class="data-col data-col-end"><span class="data-more"><em class="icon ni ni-forward-ios"></em></span></div>
+                                    </div><!-- data-item -->
+                                    <div class="data-item" data-bs-toggle="modal" data-bs-target="#profile-edit">
+                                        <div class="data-col">
+                                            <span class="data-label">Apellidos</span>
+                                            <span class="data-value">{{person.last_name}}  {{person.mothers_last_name}}</span>
+                                        </div>
+                                        <div class="data-col data-col-end"><span class="data-more"><em class="icon ni ni-forward-ios"></em></span></div>
+                                    </div><!-- data-item -->
+
+
+                                    <div class="data-item" data-bs-toggle="modal" data-bs-target="#profile-edit">
+                                        <div class="data-col">
+                                            <span class="data-label">Cedula de identidad</span>
+                                            <span class="data-value">{{person.identity_card}}</span>
+                                        </div>
+                                        <div class="data-col data-col-end"><span class="data-more"><em class="icon ni ni-forward-ios"></em></span></div>
+                                    </div><!-- data-item -->
+
+                                    <div class="data-item">
+                                        <div class="data-col">
+                                            <span class="data-label">Correo</span>
+                                            <span class="data-value">{{person.email}}</span>
+                                        </div>
+                                        <div class="data-col data-col-end"><span class="data-more disable"><em class="icon ni ni-lock-alt"></em></span></div>
+                                    </div><!-- data-item -->
+                                    <div class="data-item" data-bs-toggle="modal" data-bs-target="#profile-edit">
+                                        <div class="data-col">
+                                            <span class="data-label">Nro Celular</span>
+                                            <span class="data-value text-soft">{{person.phone}}</span>
+                                        </div>
+                                        <div class="data-col data-col-end"><span class="data-more"><em class="icon ni ni-forward-ios"></em></span></div>
+                                    </div><!-- data-item -->
+                                    <div class="data-item" data-bs-toggle="modal" data-bs-target="#profile-edit">
+                                        <div class="data-col">
+                                            <span class="data-label">Fecha Nacimiento</span>
+                                            <span class="data-value">{{person.birth_date}}</span>
+                                        </div>
+                                        <div class="data-col data-col-end"><span class="data-more"><em class="icon ni ni-forward-ios"></em></span></div>
+                                    </div><!-- data-item -->
+                                    <div class="data-item" data-bs-toggle="modal" data-bs-target="#profile-edit" data-tab-target="#address">
+                                        <div class="data-col">
+                                            <span class="data-label">Dirección</span>
+                                            <span class="data-value">{{person.address}}</span>
+                                        </div>
+                                        <div class="data-col data-col-end"><span class="data-more"><em class="icon ni ni-forward-ios"></em></span></div>
+                                    </div><!-- data-item -->
+                                </div><!-- data-list -->
+                                <div class="nk-data data-list">
+                                    <div class="data-head">
+                                        <h6 class="overline-title">Aplicante</h6>
+                                    </div>
+                                    <div class="data-item" *ngIf="person" >
+                                        <div class="data-col">
+                                            <span class="data-label">RDA</span>
+                                            <span class="data-value">{{(person.applicant)? person.applicant.rda_number:''}}</span>
+                                        </div>
+                                        <div class="data-col data-col-end"><a  class="link link-primary">Cambiar RDA</a></div>
+                                    </div><!-- data-item -->
+                                   
+                                   
+                                </div><!-- data-list -->
+                            </div><!-- .nk-block -->
+                        </div>
+                        <div class="card-aside card-aside-left user-aside toggle-slide toggle-slide-left toggle-break-lg" data-toggle-body="true" data-content="userAside" data-toggle-screen="lg" data-toggle-overlay="true">
+                            <div class="card-inner-group" data-simplebar>
+                                <div class="card-inner">
+                                    <div class="user-card">
+                                        <div class="user-avatar bg-primary" *ngIf="person" >
+                                            <img [src]="person.image_profile" >
+                                        </div>
+                                        <div class="user-info">
+                                            <span class="lead-text">{{person?person.firts_name:''}} {{person?person.second_name:''}} {{person?person.last_name:''}}</span>
+                                            <span class="sub-text">{{person?person.email:''}}</span>
+                                        </div>
+                                        <div class="user-action">
+                                            <div class="dropdown">
+                                                <a class="btn btn-icon btn-trigger me-n2" data-bs-toggle="dropdown" href="#"><em class="icon ni ni-more-v"></em></a>
+                                                <div class="dropdown-menu dropdown-menu-end">
+                                                    <ul class="link-list-opt no-bdr">
+                                                        <li><a style="cursor: pointer;" (click)="fileInput.click()" ><em class="icon ni ni-camera-fill"></em><span>Cambiar Foto</span></a></li>
+                                                        <li><a href="#"><em class="icon ni ni-edit-fill"></em><span>Actualizar datos</span></a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <input #fileInput type="file" (change)="onFileInput(fileInput.files)" style="display:none;" />
+
+                                    </div><!-- .user-card -->
+                                </div><!-- .card-inner -->
+                                <div class="card-inner">
+                                    <div class="user-account-info py-0">
+                                        <h6 class="overline-title-alt">Usuario</h6>
+                                        <div class="user-balance">{{(username)?username:''}}</div>
+                                       
+                                    </div>
+                                </div><!-- .card-inner -->
+                               
+                            </div><!-- .card-inner-group -->
+                        </div><!-- card-aside -->
+                    </div><!-- .card-aside-wrap -->
+                </div><!-- .card -->
+            </div><!-- .nk-block -->
+        </div>
+    </div>
+</div>

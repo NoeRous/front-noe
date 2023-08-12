@@ -1,0 +1,100 @@
+<div class="container-fluid">
+  <div class="nk-content-inner">
+    <div class="nk-block">
+      <div class="card">
+          <div class="card-aside-wrap">
+              <div class="card-inner card-inner-sm">
+                  <div class="nk-block-head nk-block-head-sm" style="display: flex; justify-content: space-between; align-items: center;">
+                    <h6>Integrantes Comisión Externos</h6>
+                    <div>
+                      <button class="btn btn-primary" data-target="addProduct" [routerLink]="['/admin/commission/members/representative', this.commissionId,'create']" label="">
+                        <em class="icon ni ni-plus"></em><span>Registrar</span>
+                      </button>
+                    </div>
+                  </div>
+              </div>
+          </div>
+          <!-- <div class="nk-block"> -->
+            <p-table #dt1 [value]="commissionExternals" selectionMode="single" [showCurrentPageReport]="true" dataKey="id"
+              [rows]="12" responsiveLayout="stack" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10, 25, 50]"
+              [loading]="loading" [paginator]="false"
+              currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} registros"
+              [tableStyle]="{ 'min-width': '20rem','max-width': '100rem'}" [rowHover]="true" [styleClass]="'p-datatable-gridlines p-datatable-sm'"
+              [globalFilterFields]="['representative.firts_name']">
+              <!-- <ng-template pTemplate="caption">
+                <div style="display: flex; justify-content: flex-end;">
+                  <span class="p-input-icon-left ml-auto">
+                    <i class="pi pi-search"></i>
+                    <input class="p-inputtext-sm" pInputText type="text"
+                      (input)="dt1.filterGlobal($any($event.target).value, 'contains')" placeholder="Búsqueda" />
+                  </span>
+                </div>
+              </ng-template> -->
+              <ng-template pTemplate="header">
+                <tr>
+                  <th style="width:10%">Nro.</th>
+                  <th pSortableColumn="representative.firts_name" style="width:15%">Nombre Completo <p-sortIcon
+                      field="representative.firts_name"></p-sortIcon></th>
+                  <th pSortableColumn="representative.identity_card" style="width:15%">Carnet<p-sortIcon
+                      field="representative.identity_card"></p-sortIcon></th>
+                  <th pSortableColumn="name_role" style="width:15%">Asignado(a) <p-sortIcon
+                      field="name_role"></p-sortIcon></th>
+                  <th pSortableColumn="representative.personal_number" style="width:15%">Número de Celular<p-sortIcon
+                      field="representative.representativeal_number"></p-sortIcon></th>
+                  <th pSortableColumn="name_institution" style="width:15%">Representa a<p-sortIcon
+                      field="name_institution"></p-sortIcon></th>
+                  <th style="width:10%">Opciones</th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-commissionExternal let-rowIndex="rowIndex">
+                <tr [pSelectableRow]="commissionExternal">
+    
+                  <td>
+                    <span class="p-column-title">Nro.:</span>
+    
+                    {{rowIndex + 1}}
+                  </td>
+    
+                  <td>
+                    <span class="p-column-title">Nombre Completo:</span>
+                    {{commissionExternal.representative.firts_name}}  {{commissionExternal.representative.second_name}} {{commissionExternal.representative.last_name}} {{commissionExternal.representative.mothers_last_name}} {{commissionExternal.representative.husband_last_name}}
+                  </td>
+                  <td>
+                    <span class="p-column-title">Carnet:</span>
+                    {{commissionExternal.representative.identity_card_complement ? commissionExternal.representative.identity_card +'-'+ commissionExternal.representative.identity_card_complement :commissionExternal.representative.identity_card }}
+              
+                  </td>
+                  <td>
+                    <span class="p-column-title">Asignado(a):</span>
+                    {{commissionExternal.name_role}}
+                  </td>
+                  <td>
+                    <span class="p-column-title">Número de Celular:</span>
+                    {{commissionExternal.representative.personal_number}}
+                  </td>
+                  <td>
+                    <span class="p-column-title">Representa a:</span>
+                    {{commissionExternal.name_institution}}
+                  </td>
+                  <td style="text-align: center;">
+                    <span class="p-column-title">Opciones:</span>
+                    <button mat-icon-button color="" (click)="btnEdit(commissionExternal)" >
+                      <mat-icon>edit</mat-icon>
+                    </button>
+                    <button mat-icon-button color="warn" (click)="btnDelete(commissionExternal)" >
+                      <mat-icon>delete</mat-icon>
+                    </button>
+                  </td>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="emptymessage">
+                <tr>
+                  <td colspan="10">No se encontraron datos.</td>
+                </tr>
+              </ng-template>
+            </p-table>
+          <!-- </div> -->
+      </div>
+    </div>
+  </div>
+</div>

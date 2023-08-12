@@ -1,0 +1,47 @@
+
+
+<div class="row pt-3 pb-3">
+  <!-- <div class="col-xxl-2"> Total de respuestas : {{(questionResponses)? questionResponses.length:0}} </div> -->
+    <div class="col-xxxl-10" style="text-align: end;">
+      <button class="btn btn-sm btn-dim btn-outline-primary" (click)="btnCreateResponse()" >
+        <em class="icon ni ni-plus"></em><span>Nueva Respuesta</span>
+      </button>
+    </div>
+  </div>
+ 
+
+  <table class="table table-sm table-bordered" *ngIf="questionResponses" >
+   
+    <tbody  >
+      <th>Respuestas</th>
+      <th colspan="2">Ponderación</th>
+      <th>Opciones</th>
+      <tr *ngFor="let response of questionResponses; let last = last" >
+        
+        <td style="width: 85%;" class="align-middle" >
+          <span [ngStyle]="{'font-weight': response.is_valid ? 'bold' : '' }" >{{response.name}}</span>
+          </td>
+        
+        <td class="text-center align-middle">
+          <span class="badge badge-dim  bg-outline-primary">{{response.percentage}}</span>
+
+        </td>
+        <td class="text-center align-middle">
+          <mat-icon class="text-success" *ngIf="response.is_valid" fontIcon="check_circle"></mat-icon>
+          <mat-icon class="text-secondarys" *ngIf="!response.is_valid" fontIcon="error"></mat-icon>
+
+        </td>
+        <td class="text-center">
+          <button mat-icon-button (click)="btnEditResponse(response)"  >
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="btnDeleteResponse(response)"  >
+            <mat-icon>delete</mat-icon>
+          </button>
+
+        </td>
+      </tr>
+      
+    </tbody>
+  </table>
+  <div class="col-xxl-2"> Total de respuestas : {{(questionResponses)? questionResponses.length:0}} </div>

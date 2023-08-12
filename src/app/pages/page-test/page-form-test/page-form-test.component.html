@@ -1,0 +1,179 @@
+
+<div class="container-fluid pt-5">
+    <div class="nk-content-inner">
+            <div class="nk-block-head nk-block-head-sm ">
+                <div class="nk-block-between">
+                    <div class="nk-block-head-content">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                              <li class="breadcrumb-item"><a routerLink="/admin/test" >Exámenes</a></li>
+                              <li class="breadcrumb-item active" aria-current="page">Nuevo</li>
+                            </ol>
+                          </nav>
+                    </div>
+                    <div class="nk-block-head-content">
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="nk-block">
+                <div class="card">
+                    <div class="card-aside-wrap">
+                        <div class="card-inner card-inner-lg">
+                            <div class="nk-block-head nk-block-head-lg">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="nk-block-head-content" *ngIf="id">
+                                            <h4 class="title nk-block-title">Editar</h4>
+                                        </div>
+                                        <div class="nk-block-head-content" *ngIf="!id">
+                                            <h4 class="title nk-block-title">Llene los campos</h4>
+                                            <div class="nk-block-des">
+                                                <p>ingrese la información requerida</p>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-6 d-flex justify-content-end">
+                                        
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="nk-block">
+                                <form [formGroup]="testForm" (ngSubmit)="onSubmit()">
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="row gy-4">
+                                                <div class="col-sm-6">
+                                                    <mat-form-field>
+                                                        <mat-label>Convocatoria</mat-label>
+                                                        <mat-select  formControlName="announcement_id">
+                                                          <mat-option *ngFor="let item of announcements" [value]="item.id">
+                                                            {{item.name}}
+                                                          </mat-option>
+                                                        </mat-select>
+                                                      </mat-form-field>
+                                                </div>
+
+                                                <div class="col-sm-6">
+                                                    <mat-form-field>
+                                                        <mat-label>Cargo</mat-label>
+                                                        <mat-select  formControlName="position_id">
+                                                          <mat-option *ngFor="let item of positions" [value]="item.id">
+                                                            {{item.name}}
+                                                          </mat-option>
+                                                        </mat-select>
+                                                      </mat-form-field>
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <div class="row gy-4">
+                                                <div class="col-sm-6">
+                                                    <mat-form-field appearance="fill">
+                                                        <mat-label>Nombre</mat-label>
+                                                        <input matInput formControlName="name">
+                                                    </mat-form-field>
+                                                </div>
+
+                                                <div class="col-sm-6">
+                                                    <mat-form-field appearance="fill">
+                                                        <mat-label>Descripción</mat-label>
+                                                        <textarea matInput formControlName="description"></textarea>
+                                                    </mat-form-field>
+                                                </div>
+
+                                                <div class="col-sm-6">
+                                                    <mat-form-field appearance="fill">
+                                                        <mat-label>Nro. total de preguntas</mat-label>
+                                                        <input matInput formControlName="total_questions">
+                                                    </mat-form-field>
+                                                </div>
+
+                                                <div class="col-sm-6">
+                                                    <mat-form-field appearance="fill">
+                                                      <mat-label>¿Orden de preguntas aleatorio?</mat-label>
+                                                      <mat-select formControlName="is_random">
+                                                        <mat-option value="true">Sí</mat-option>
+                                                        <mat-option value="false">No</mat-option>
+                                                      </mat-select>
+                                                    </mat-form-field>
+                                                  </div>
+
+                                                <div class="col-sm-6">
+                                                    <mat-form-field appearance="fill">
+                                                      <mat-label>Fecha de inicio</mat-label>
+                                                      <input matInput [matDatepicker]="datePickerStart" formControlName="date_init">
+                                                      <mat-datepicker-toggle matSuffix [for]="datePickerStart"></mat-datepicker-toggle>
+                                                      <mat-datepicker #datePickerStart></mat-datepicker>
+                                                    </mat-form-field>
+                                                </div>
+                                                  
+                                                <div class="col-sm-6">
+                                                    <mat-form-field appearance="fill">
+                                                      <mat-label>Fecha de finalización</mat-label>
+                                                      <input matInput [matDatepicker]="datePickerEnd" formControlName="date_end">
+                                                      <mat-datepicker-toggle matSuffix [for]="datePickerEnd"></mat-datepicker-toggle>
+                                                      <mat-datepicker #datePickerEnd></mat-datepicker>
+                                                    </mat-form-field>
+                                                </div>
+
+                                                <div class="col-sm-6">
+                                                    <mat-form-field appearance="fill">
+                                                        <mat-label>Tiempo de duración(min)</mat-label>
+                                                        <input matInput formControlName="time">
+                                                    </mat-form-field>
+                                                </div>
+
+                                                <div class="col-sm-6">
+                                                    <mat-form-field appearance="fill">
+                                                        <mat-label>Puntaje minimo de aprobación</mat-label>
+                                                        <input matInput formControlName="minimum_score">
+                                                    </mat-form-field>
+                                                </div>
+
+                                                <div class="col-sm-6">
+                                                    <mat-form-field appearance="fill">
+                                                        <mat-label>Nro. de intentos permitidos</mat-label>
+                                                        <input matInput formControlName="num_attemps">
+                                                    </mat-form-field>
+                                                </div>
+
+                                                <div class="col-sm-6">
+                                                    <mat-form-field appearance="fill">
+                                                        <mat-label>Nro. de preguntas de visualización(por página)</mat-label>
+                                                        <input matInput formControlName="questions_per_page">
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <hr class="preview-hr">
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                        </div>
+                                        <div class="col-md-8 text-lg-end">
+                                            <a routerLink="/admin/test" mat-raised-button color="warn"
+                                                class="mx-2">Cancelar</a>
+                                            <button type="submit" mat-raised-button color="primary"> 
+                                                {{this.id?'Guardar Cambios':'Guardar'}} </button>
+                                        </div>
+                                        <div class="col-md-2">
+                                        </div>
+                                    </div>
+                    
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+
+

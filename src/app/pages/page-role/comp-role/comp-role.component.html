@@ -1,0 +1,62 @@
+
+
+
+<div class="row">
+    <div class="col-md-6">
+       <strong>TODOS LOS ROLES</strong>
+    </div>
+    <div class="col-md-6 d-flex justify-content-end">
+        <button  class=" btn btn-primary d-none d-md-inline-flex" (click)="btnRegister()" ><em
+            class="icon ni ni-plus"></em></button>
+
+    </div>
+</div>
+
+<br>
+
+<div class="nk-tb-list ">
+    <div class="nk-tb-item nk-tb-head">
+        
+        
+        <div class="nk-tb-col"><span>ROL</span></div>
+        
+        <div class="nk-tb-col nk-tb-col-tools">
+           OPC.
+        </div>
+    </div><!-- .nk-tb-item -->
+    <div class="nk-tb-item  "  *ngFor="let rol of roles; let i=index" [ngClass]="{'item-select-rol' : rolSelec?(rolSelec.id==rol.id):false }" >
+       
+        
+        <div class="nk-tb-col">
+            <span class="tb-sub">{{rol.name}}</span>
+        </div>
+      
+    
+        <div class="nk-tb-col nk-tb-col-tools">
+
+            <button mat-icon-button [matMenuTriggerFor]="menuButton" aria-label="Example icon-button with a menu">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              <mat-menu #menuButton="matMenu">
+
+              
+
+                <button mat-menu-item  (click)="btnMenus(rol)">
+                  <mat-icon>list_alt</mat-icon>
+                  <span>Ver Menus</span>
+                </button>
+                <button mat-menu-item (click)="btnEdit(rol)" >
+                  <mat-icon>edit</mat-icon>
+                  <span>Editar</span>
+                </button>
+                <button mat-menu-item (click)="btnDelete(rol)" >
+                  <mat-icon>delete</mat-icon>
+                  <span>Eliminar</span>
+                </button>
+              </mat-menu>
+
+
+       
+        </div>
+    </div><!-- .nk-tb-item -->
+</div>

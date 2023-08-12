@@ -1,0 +1,27 @@
+<h2 mat-dialog-title> {{role?'Editar':'Nuevo'}}  Rol</h2>
+<form [formGroup]="roleForm" (ngSubmit)="onSubmitResponse()">
+
+    <mat-dialog-content >
+
+
+        <div class="row gy-0">
+            <div class="col-12">
+
+
+                
+                <mat-form-field appearance="fill">
+                    <mat-label>Rol</mat-label>
+                    <input matInput formControlName="name" >
+                  </mat-form-field>
+            </div>
+        </div>
+
+
+
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button mat-stroked-button mat-dialog-close color="warn">Cancel</button>
+        <button mat-stroked-button type="submit" color="primary" [disabled]="!roleForm.valid" cdkFocusInitial> {{role?'Guardar Cambios':'Guardar'}} </button>
+    </mat-dialog-actions>
+
+</form>

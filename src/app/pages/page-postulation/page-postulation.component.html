@@ -1,0 +1,146 @@
+<div class="container-fluid mt-5">
+  <div class="nk-content-inner">
+    <div class="nk-block-head-content">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item active" aria-current="page">Mis Postulaciones</li>
+        </ol>
+      </nav>
+    </div>
+
+    <div class="nk-block">
+      <div class="card">
+          <div class="card-aside-wrap">
+              <div class="card-inner card-inner-sm">
+                  <div class="nk-block-head nk-block-head-sm" style="display: flex; justify-content: space-between; align-items: center;">
+                    <h6>Mis Postulaciones</h6>
+                    <div>
+                      <button class="btn btn-primary" data-target="addProduct" routerLink="/admin/postulation/create" label="">
+                        <em class="icon ni ni-plus"></em><span>Registrar</span>
+                      </button>
+                    </div>
+                  </div>
+              </div>
+          </div>
+          <!-- <div class="nk-block"> -->
+            <p-table #dt1 [value]="postulations" selectionMode="single" [showCurrentPageReport]="true" dataKey="id"
+              [rows]="12" responsiveLayout="stack" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10, 25, 50]"
+              [loading]="loading" [paginator]="true"
+              currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} registros"
+              [tableStyle]="{ 'min-width': '20rem','max-width': '100rem'}" [rowHover]="true" [styleClass]="'p-datatable-gridlines p-datatable-sm'"
+              [globalFilterFields]="['institution_name','position_type_name','position_name','voucher','current_phase_name']">
+              <ng-template pTemplate="caption">
+                <div style="display: flex; justify-content: flex-end;">
+                  <span class="p-input-icon-left ml-auto">
+                    <i class="pi pi-search"></i>
+                    <input class="p-inputtext-sm" pInputText type="text"
+                      (input)="dt1.filterGlobal($any($event.target).value, 'contains')" placeholder="Búsqueda" />
+                  </span>
+                </div>
+              </ng-template>
+              <ng-template pTemplate="header">
+                <tr>
+                  <th>Nro.</th>
+                  <th pSortableColumn="institution_name" style="width:15%">ESFM/UP/UA <p-sortIcon
+                      field="institution_name"></p-sortIcon></th>
+                  <th pSortableColumn="position_type_name" style="width:15%">Tipo de cargo <p-sortIcon
+                      field="position_type_name"></p-sortIcon></th>
+                  <th pSortableColumn="position_name" style="width:15%">Cargo <p-sortIcon
+                      field="position_name"></p-sortIcon></th>
+                  <th pSortableColumn="voucher" style="width:15%">Nro Comprobante <p-sortIcon field="voucher"></p-sortIcon>
+                  </th>
+                  <th pSortableColumn="created_at" style="width:15%">Fecha de Registro <p-sortIcon
+                      field="created_at"></p-sortIcon></th>
+                  <th pSortableColumn="current_phase_name" style="width:15%">Fase Actual <p-sortIcon
+                      field="current_phase_name"></p-sortIcon></th>
+                  <th style="width:10%">Opciones</th>
+                </tr>
+                <!-- <tr>
+                                      <th>
+                                      </th>
+                                      <th>
+                                        <p-columnFilter type="text" field="institution_name"></p-columnFilter>
+                                      </th>
+                                      <th>
+                                        <p-columnFilter type="text" field="position_type_name"></p-columnFilter>
+                                      </th>
+                                      <th>
+                                        <p-columnFilter type="text" field="position_name"></p-columnFilter>
+                                      </th>
+                                      <th>
+                                        <p-columnFilter type="text" field="voucher"></p-columnFilter>
+                                      </th>
+                                      <th>
+                                        <p-columnFilter type="text" field="created_at"></p-columnFilter>
+                                      </th>
+                                      <th>
+                                        <p-columnFilter type="text" field="current_phase_name"></p-columnFilter>
+                                      </th>
+                                    </tr> -->
+    
+              </ng-template>
+              <ng-template pTemplate="body" let-postulation let-rowIndex="rowIndex">
+                <tr [pSelectableRow]="postulation">
+    
+                  <td>
+                    <span class="p-column-title">Nro.:</span>
+    
+                    {{rowIndex + 1}}
+                  </td>
+    
+                  <td>
+                    <span class="p-column-title">ESFM/UP/UA:</span>
+                    {{postulation.institution_name}}
+                  </td>
+                  <td>
+                    <span class="p-column-title">Tipo de cargo:</span>
+                    {{postulation.position_type_name}}
+                  </td>
+                  <td>
+                    <span class="p-column-title">Cargo:</span>
+                    {{postulation.position_name}}
+                    <br>
+                    <span class="badge rounded-pill bg-outline-info">{{postulation.announcement_name}}</span>
+                  </td>
+                  <td>
+                    <span class="p-column-title">Nro.Comprobante:</span>
+                    {{postulation.voucher}}
+                    <a target="_blank" [attr.href]="urlUpload+postulation.voucher_url">(Ver)</a>
+                  </td>
+                  <td>
+                    <span class="p-column-title">Fecha de Registro:</span>
+                    {{postulation.created_at | date: 'dd/MM/yyyy hh:mm:ss'}}
+                  </td>
+                  <td>
+                    <span class="p-column-title">Fase Actual:</span>
+                    <p-tag [rounded]="true" [value]="postulation.current_phase_name"
+                      [severity]="getSeverity(postulation.current_phase_name)"></p-tag>
+    
+                    <!-- {{postulation.current_phase_name}} -->
+                  </td>
+                  <td style="text-align: center;">
+                    <span class="p-column-title">Opciones:</span>
+                    <button mat-mini-fab color="primary" [matMenuTriggerFor]="menu" (click)="getPhases()">
+                      <mat-icon>more_vert</mat-icon>
+                    </button>
+                    <mat-menu #menu="matMenu" xPosition="before">
+                      <button mat-menu-item *ngFor="let item of phases"
+                        (click)="btnVerifyPhasePostulation(postulation,item)">
+                        <mat-icon>{{ item.icon_action }}</mat-icon>
+                        <span>{{ item.name_action }}</span>
+                      </button>
+                    </mat-menu>
+                  </td>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="emptymessage">
+                <tr>
+                  <td colspan="8">No se encontraron datos.</td>
+                </tr>
+              </ng-template>
+            </p-table>
+          <!-- </div> -->
+      </div>
+    </div>
+  </div>
+</div>

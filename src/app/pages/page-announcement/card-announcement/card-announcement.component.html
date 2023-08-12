@@ -1,0 +1,37 @@
+<div class="card card-full">
+            
+    <div class="card-inner ">
+        <div class="user-card" *ngIf="announcement">
+            
+            <div class="user-info"  >
+                <span class="lead-text">Convocatoria Vigente</span>
+                <span class="sub-text">{{announcement.name}}</span>
+                <span class="sub-text">{{announcement.description}}</span>
+
+
+            <br>
+
+            <span class="lead-text">Desde:</span>
+                <span class="sub-text">{{announcement.date_init}}</span>
+
+        
+            <span class="lead-text">Hasta:</span>
+                <span class="sub-text">{{announcement.date_end}}</span>
+
+            </div>
+
+        </div><!-- .user-card -->
+    </div>
+
+    <div class="card-inner border-bottom" *ngIf="announcement" >
+        <div class="user-account-info py-0">
+            <h6 class="overline-title-alt">Cite</h6>
+            <div class="user-balance">{{announcement.cite}}  </div>
+            
+        </div>
+    </div><!-- .card-inner -->
+
+
+
+
+</div>

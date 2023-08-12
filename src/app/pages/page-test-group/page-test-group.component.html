@@ -1,0 +1,92 @@
+
+<div class="container-fluid pt-5">
+    <div class="nk-content-inner">
+            <div class="nk-block-head nk-block-head-sm ">
+                <div class="nk-block-between">
+                    <div class="nk-block-head-content">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                              <li class="breadcrumb-item"><a routerLink="/admin/test" >Exámenes</a></li>
+                              <li class="breadcrumb-item active" aria-current="page"> {{test?test.announcement.name:'Convocatoria'}} - {{test?test.name:'Grupo'}} </li>
+                            </ol>
+                          </nav>
+                    </div>
+                    <div class="nk-block-head-content">
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="nk-block">
+                <div class="card">
+                    <div class="card-aside-wrap">
+                        <div class="card-inner card-inner-lg">
+                            <div class="nk-block-head nk-block-head-lg">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                       
+                                        Grupos
+
+                                    </div>
+                                    <div class="col-md-6 d-flex justify-content-end">
+                                        <a [routerLink]="'/admin/test/group/' + testId + '/create'" data-target="addProduct" class="toggle btn btn-primary d-none d-md-inline-flex">
+                                            <em class="icon ni ni-plus"></em>
+                                            <span>Registrar Grupo</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="nk-block">
+                                <table class="table table-bordered">
+                                    <thead>
+                                      <tr>
+                                        <th scope="col" class="text-center">#</th>
+                                        <th scope="col">Nombre</th>
+                                        <th scope="col">Descripción</th>
+                                        <th scope="col">Nro Preguntas requeridas</th>
+                                        <th scope="col">Nro Preguntas registradas</th>
+                                        <th scope="col" class="text-center">Opc.</th>
+                                        <th scope="col" class="text-center">Preguntas</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr *ngFor="let testGroup of testGroups; let i=index" >
+                                        <th  class="align-middle text-cente">{{i+1}}</th>
+                                        <td class="align-middle">{{testGroup.name}}</td>
+                                    
+                                        <td class="align-middle">{{testGroup.description}}</td>
+                                        <td class="align-middle">{{testGroup.num_questions}}</td>
+                                        <td class="align-middle">{{testGroup.test_group_question.length}}</td>
+                                    
+                                        <td class="text-center">
+                                          
+                                            <button mat-icon-button  (click)="btnEdit(testGroup)" >
+                                                <mat-icon>edit</mat-icon>
+                                              </button>
+                                              <button mat-icon-button color="warn" (click)="btnDelete(testGroup)" >
+                                                <mat-icon>delete</mat-icon>
+                                              </button>
+                                             
+                                        </td>
+                                        <td class="text-center">
+                                            <button mat-mini-fab color="primary" (click)="btnQuestions(testGroup)">
+                                                <mat-icon>arrow_forward</mat-icon>
+                                            </button>
+                                        </td>
+                                      </tr>
+                                    
+                                    </tbody>
+                                  </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+
+
+
+
+
+

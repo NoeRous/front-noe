@@ -1,0 +1,93 @@
+
+<br><br><br>
+<div class="container-fluid">
+    <div class="nk-content-inner">
+        <div class="nk-content-body">
+            <div class="nk-block-head nk-block-head-sm">
+                <div class="nk-block-between">
+                    <div class="nk-block-head-content">
+                        <h3 class="nk-block-title page-title">Usuarios</h3>
+                    </div><!-- .nk-block-head-content -->
+                    <div style="display: flex; justify-content: flex-end;">
+                        <button class="btn btn-primary" routerLink="/admin/user/create" label="">
+                            <em class="icon ni ni-plus"></em><span>Registrar</span>
+                        </button>
+                    </div>
+                </div><!-- .nk-block-between -->
+            </div><!-- .nk-block-head -->
+            <div class="nk-block nk-block-head-sm">
+                    <div class="card-aside-wrap">
+                            <div class="nk-block">
+                                <div class="card">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                          <tr>
+                                            <th scope="col">Nro.</th>
+                                            <th scope="col">Usuario</th>
+                
+                                            <th scope="col">Nombre</th>
+                                            <th scope="col">Cedula de identidad </th>
+                                            <th scope="col">Correo</th>
+                                            <th scope="col">Celular</th>
+                                            
+                                            <th scope="col">Fecha de registro</th>
+                                            <!-- <th scope="col">Nombre Completo</th>
+                                            <th scope="col">Nro de carnet</th> -->
+                                            <th scope="col">Rol</th>
+                                            <th scope="col" class="text-center">Opc.</th>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                          <tr *ngFor="let user of users; let i=index" >
+                                            <th scope="row">{{i+1}}</th>
+                                            <td>{{user.username}}</td>
+                
+                                            <td>{{user.person.firts_name}} {{user.person.second_name}} {{user.person.last_name}} {{user.person.mothers_last_name}} </td>
+                                            <td>{{user.person.identity_card}}</td>
+                                            <td>{{user.person.email}}</td>
+                                            <td>{{user.person.phone}}</td>
+                
+                                            <td>{{user.created_at}}</td>
+                                            <!-- <td>{{announcement.description}}</td>
+                                            <td>{{announcement.date_init}}</td>
+                                            <td>{{announcement.date_end}}</td>
+                                            <td>{{announcement.cite}}</td> -->
+                                            <td>
+                                                <div *ngIf="user.userRole" >
+                                                    {{user.userRole.role.name}}
+                                                </div>
+                                            </td>
+                                            <td class="text-center">
+                
+                                                <button mat-mini-fab color="primary" (click)="btnDialogRoles(user)" >
+                                                    <mat-icon>format_list_bulleted</mat-icon>
+                                                </button>
+                
+                                                <!-- <button mat-mini-fab color="primary" (click)="btnDialogInstitutions(user)" >
+                                                    <mat-icon>location_city</mat-icon>
+                                                </button> -->
+                
+                                                <!-- <button mat-icon-button  (click)="btnEdit(announcement)" >
+                                                    <mat-icon>edit</mat-icon>
+                                                  </button>
+                                                  <button mat-icon-button color="warn" (click)="btnDelete(announcement)" >
+                                                    <mat-icon>delete</mat-icon>
+                                                  </button> -->
+                                            </td>
+                                          </tr>
+                                        
+                                        
+                                        </tbody>
+                                      </table>
+                
+                                </div>
+                            </div>
+                    </div>
+            
+            </div>
+           
+</div>
+    
+
+               
+

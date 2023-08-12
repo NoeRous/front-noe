@@ -1,0 +1,32 @@
+<h2 mat-dialog-title> Pregunta y Respuestas</h2>
+<mat-dialog-content>
+    <p>
+        <strong>PREGUNTA: </strong> {{question?question.name:''}}
+    </p>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Respuesta</th>
+                <th scope="col">Puntaje</th>
+                <th scope="col">Resp.</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let response of questionResponses; let last = last">
+                <td style="width: 85%;" class="align-middle">
+                    <span [ngStyle]="{'font-weight': response.is_valid ? 'bold' : '' }">{{response.name}}</span>
+                </td>
+                <td class="text-center align-middle">
+                    <span class="badge badge-dim  bg-outline-primary">{{response.percentage}}</span>
+                </td>
+                <td class="text-center align-middle">
+                    <mat-icon class="text-success" *ngIf="response.is_valid" fontIcon="check_circle"></mat-icon>
+                    <mat-icon class="text-secondarys" *ngIf="!response.is_valid" fontIcon="error"></mat-icon>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-stroked-button mat-dialog-close color="warn">Cancel</button>
+</mat-dialog-actions>

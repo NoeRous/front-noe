@@ -1,0 +1,91 @@
+<div class="row">
+    <div class="col-md-6">
+        <div class="row">
+            <div class="col-md-6">
+                <div *ngIf="rolSelect">
+                    <strong>ROL: </strong> {{rolSelect.name}}
+                </div>
+            </div>
+            <div class="col-md-6 d-flex justify-content-end" (click)="btnRegister()">
+                <button class=" btn btn-primary d-none d-md-inline-flex"><em class="icon ni ni-plus"></em></button>
+            </div>
+        </div>
+        <br>
+        <div cdkDropList class="card-list" (cdkDropListDropped)="drop($event)">
+            <div class="item-box" *ngFor="let menu of menus" cdkDrag>
+                <div class="item-custom-placeholder" *cdkDragPlaceholder>
+
+                </div>
+
+                <table class="table table-sm ">
+
+                    <tbody>
+                        <tr>
+                            <th scope="row" class="align-middle " style="width: 50px;" > 
+                                 <mat-icon class="text-success" fontIcon="done" *ngIf="(menu.role_menus | verifyMenu)" ></mat-icon>   
+                            </th>
+                            <td class="align-middle">
+                                <div [ngClass]="{'text-black': (menu.role_menus | verifyMenu)}" >
+                                    {{menu.name}} <br>
+                                    <small style="font-size: 9px;">{{menu.group}}</small>
+                                </div>
+                            </td>
+                            <th scope="row" class="align-middle text-lg-end">
+
+                                <button mat-icon-button [matMenuTriggerFor]="menuButton"
+                                    aria-label="Example icon-button with a menu">
+                                    <mat-icon>more_vert</mat-icon>
+                                </button>
+                                <mat-menu #menuButton="matMenu">
+
+
+                                    <button mat-menu-item (click)="btnMenu(menu)" >
+                                        <mat-icon>list_alt</mat-icon>
+                                        <span>Sub Menus</span>
+                                    </button>
+
+                                    <button *ngIf="(menu.role_menus | verifyMenu)" mat-menu-item (click)="btnQuitarMenu(menu)" >
+                                        <mat-icon>delete</mat-icon>
+                                        <span>Quitar menu</span>
+                                    </button>
+
+
+                                    <button *ngIf="!(menu.role_menus | verifyMenu)" mat-menu-item (click)="btnAsignarMenu(menu)" >
+                                        <mat-icon>add_box</mat-icon>
+                                        <span>Asignar menu </span>
+                                    </button>
+
+                                    
+                                    <button mat-menu-item (click)="btnEdit(menu)">
+                                        <mat-icon>edit</mat-icon>
+                                        <span>Editar</span>
+                                    </button>
+                                    <button mat-menu-item disabled>
+                                        <mat-icon>delete</mat-icon>
+                                        <span>Eliminar</span>
+                                    </button>
+                                </mat-menu>
+
+                            </th>
+                        </tr>
+
+
+                    </tbody>
+                </table>
+
+
+            </div>
+        </div>
+
+
+    </div>
+    <div class="col-md-6">
+        <div *ngIf="roleMenuSelect ">
+
+
+            <app-comp-list-sub-menu [roleMenuInput]="roleMenuSelect"   ></app-comp-list-sub-menu>
+        </div>
+    </div>
+</div>
+
+<br> <br>

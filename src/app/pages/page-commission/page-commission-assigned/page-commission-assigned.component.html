@@ -1,0 +1,116 @@
+<div class="container-fluid mt-5">
+  <div class="nk-content-inner">
+    <div class="nk-block-head nk-block-head-sm ">
+      <div class="nk-block-between">
+        <div class="nk-block-head-content">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a routerLink="/admin/commission">Mis Comisiones</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Cargos Asignados</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+      <div class="nk-block">
+        <div class="card">
+          <div class="card-aside-wrap">
+            <div class="card-inner card-inner-sm">
+              <div class="nk-block-head nk-block-head-sm"
+                style="display: flex; justify-content: space-between; align-items: center;">
+                <h6>Cargos Asignados</h6>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="nk-block"> -->
+          <p-table #dt1 [value]="commissionAssigneds" selectionMode="single" [showCurrentPageReport]="true"
+            dataKey="id" [rows]="12" responsiveLayout="stack" [showCurrentPageReport]="true"
+            [rowsPerPageOptions]="[10, 25, 50]" [loading]="loading" [paginator]="false"
+            currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} registros"
+            [tableStyle]="{ 'min-width': '20rem','max-width': '100rem'}" [rowHover]="true"
+            [styleClass]="'p-datatable-gridlines p-datatable-sm'" [globalFilterFields]="['act_end_date']">
+            <!-- <ng-template pTemplate="caption">
+            <div style="display: flex; justify-content: flex-end;">
+              <span class="p-input-icon-left ml-auto">
+                <i class="pi pi-search"></i>
+                <input class="p-inputtext-sm" pInputText type="text"
+                  (input)="dt1.filterGlobal($any($event.target).value, 'contains')" placeholder="Búsqueda" />
+              </span>
+            </div>
+          </ng-template> -->
+            <ng-template pTemplate="header">
+              <tr>
+                <th style="width:10%">Nro.</th>
+                <th pSortableColumn="announcementInstitutionPosition.institutionPosition.institution.name"
+                  style="width:15%">Institución <p-sortIcon
+                    field="announcementInstitutionPosition.institutionPosition.institution.name"></p-sortIcon></th>
+                <th pSortableColumn="announcementInstitutionPosition.institutionPosition.position.name"
+                  style="width:15%">Cargo<p-sortIcon field="representative.identity_card"></p-sortIcon></th>
+                <th
+                  pSortableColumn="commissionAssigned.announcementInstitutionPosition.institutionPosition.position.t_par_position_type.name"
+                  style="width:15%">Tipo de cargo <p-sortIcon
+                    field="commissionAssigned.announcementInstitutionPosition.institutionPosition.position.t_par_position_type.name"></p-sortIcon>
+                </th>
+                <th pSortableColumn="act_init_date" style="width:15%">Fecha de apertura de Acta<p-sortIcon
+                    field="act_init_date"></p-sortIcon></th>
+                <th pSortableColumn="act_end_date" style="width:15%">Fecha de cierre de Acta<p-sortIcon
+                    field="act_end_date"></p-sortIcon></th>
+                <th style="width:10%">Opciones</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-commissionAssigned let-rowIndex="rowIndex">
+              <tr [pSelectableRow]="commissionAssigned">
+
+                <td>
+                  <span class="p-column-title">Nro.:</span>
+
+                  {{rowIndex + 1}}
+                </td>
+
+                <td>
+                  <span class="p-column-title">Institución:</span>
+                  {{commissionAssigned.announcementInstitutionPosition.institutionPosition.institution.name}}
+                </td>
+                <td>
+                  <span class="p-column-title">Cargo:</span>
+                  {{commissionAssigned.announcementInstitutionPosition.institutionPosition.position.name}}
+
+                </td>
+                <td>
+                  <span class="p-column-title">Tipo de cargo:</span>
+                  {{commissionAssigned.announcementInstitutionPosition.institutionPosition.position.t_par_position_type.name}}
+                </td>
+                <td>
+                  <span class="p-column-title">Fecha de apertura de Acta:</span>
+                  {{commissionAssigned.act_init_date | date: 'dd/MM/yyyy hh:mm:ss'}}
+                </td>
+                <td>
+                  <span class="p-column-title">Fecha de cierre de Acta:</span>
+                  {{commissionAssigned.act_end_date | date: 'dd/MM/yyyy hh:mm:ss'}}
+                </td>
+                <td style="text-align: center;">
+                  <span class="p-column-title">Opciones:</span>
+                  <button mat-icon-button color="" (click)="btnDialogEdit(commissionAssigned)">
+                    <mat-icon>edit</mat-icon>
+                  </button>
+                  <!-- <button mat-icon-button color="warn" (click)="btnDelete(commissionExternal)" >
+                  <mat-icon>delete</mat-icon>
+                </button> -->
+                </td>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+              <tr>
+                <td colspan="10">No se encontraron datos.</td>
+              </tr>
+            </ng-template>
+          </p-table>
+          <!-- </div> -->
+
+        </div>
+      </div>
+
+    </div>
+
+
+  </div>
+</div>

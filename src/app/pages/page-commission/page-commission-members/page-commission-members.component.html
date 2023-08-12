@@ -1,0 +1,41 @@
+<div class="container-fluid mt-5">
+    <div class="nk-content-inner">
+        <div class="nk-block-head nk-block-head-sm ">
+            <div class="nk-block-between">
+                <div class="nk-block-head-content">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a routerLink="/admin/commission">Mis Comisiones</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Integrantes</li>
+                        </ol>
+                    </nav>
+                </div>
+                <div class="nk-block-head-content">
+
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div *ngIf="commission">
+                <h5>
+                    {{commission.name}}
+                </h5>
+            </div>
+        </div>
+
+        <br>
+
+        <div>
+            <div *ngIf="commission">
+                <app-page-commission-members-int [commission]="commission"></app-page-commission-members-int>
+                <br>
+                <app-page-commission-members-ext [commission]="commission"></app-page-commission-members-ext>
+            </div>
+        </div>
+
+        <br>
+
+
+
+    </div>
+</div>
