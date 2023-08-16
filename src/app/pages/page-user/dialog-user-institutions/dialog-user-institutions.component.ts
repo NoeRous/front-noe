@@ -22,7 +22,7 @@ export class DialogUserInstitutionsComponent {
   institutions : Institution[] = [];
 
   userInstitutionForm = this.fb.group({
-    announcent_id: ['', Validators.required],
+    announcement_id: ['', Validators.required],
     institution_id: ['', Validators.required],
     user_id: [0, Validators.required],
     

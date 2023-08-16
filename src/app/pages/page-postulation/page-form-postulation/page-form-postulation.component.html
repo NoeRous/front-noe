@@ -5,13 +5,13 @@
                 <div class="nk-block-head-content">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                          <li class="breadcrumb-item"><a routerLink="/admin/postulation" >Mis Postulaciones</a></li>
-                          <li class="breadcrumb-item active" aria-current="page">Nuevo</li>
+                            <li class="breadcrumb-item"><a routerLink="/admin/postulation">Mis Postulaciones</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Nuevo</li>
                         </ol>
-                      </nav>
+                    </nav>
                 </div>
                 <div class="nk-block-head-content">
-                    
+
                 </div>
             </div>
         </div>
@@ -33,79 +33,122 @@
                                     <div class="col-md-2">
                                     </div>
                                     <div class="col-md-12">
-            
+
                                         <span class="preview-title-lg overline-title">DATOS POSTULACIÓN</span>
 
                                         <div class="row gy-4">
                                             <div class="col-sm-6">
-                                                <mat-form-field>
+                                                <mat-form-field appearance="outline">
                                                     <mat-label>ESFM/UP/UA</mat-label>
-                                                    <mat-select  formControlName="institution_id" (selectionChange)="doSomethingTypePosition($event)" >
-                                                      <mat-option *ngFor="let item of institutions" [value]="item.id">
-                                                         - {{item.name}}
-                                                      </mat-option>
+                                                    <mat-select formControlName="institution_id"
+                                                        (selectionChange)="doSomethingTypePosition($event)">
+                                                        <mat-option *ngFor="let item of institutions" [value]="item.id">
+                                                            - {{item.name}}
+                                                        </mat-option>
                                                     </mat-select>
-                                                  </mat-form-field>
+                                                    <div *ngIf="postulacionForm.get('institution_id')?.invalid && (postulacionForm.get('institution_id')?.dirty || postulacionForm.get('institution_id')?.touched)"
+                                                        style="color:red;">
+                                                        <div
+                                                            *ngIf="postulacionForm.get('institution_id')?.hasError('required')">
+                                                            <b>El campo es requerido</b>
+                                                        </div>
+                                                    </div>
+                                                </mat-form-field>
                                             </div>
                                             <div class="col-sm-6"></div>
 
                                         </div>
 
                                         <div class="row gy-4">
-                                           
+
                                             <div class="col-sm-6">
 
-                                                <mat-form-field>
+                                                <mat-form-field appearance="outline">
                                                     <mat-label>Tipo Cargo</mat-label>
-                                                    <mat-select  formControlName="position_type_id" (selectionChange)="doSomething($event)" >
-                                                      <mat-option *ngFor="let item of positionsType" [value]="item.id">
-                                                        {{item.name}}
-                                                      </mat-option>
+                                                    <mat-select formControlName="position_type_id"
+                                                        (selectionChange)="doSomething($event)">
+                                                        <mat-option *ngFor="let item of positionsType"
+                                                            [value]="item.id">
+                                                            {{item.name}}
+                                                        </mat-option>
                                                     </mat-select>
-                                                  </mat-form-field>
+                                                    <div *ngIf="postulacionForm.get('position_type_id')?.invalid && (postulacionForm.get('position_type_id')?.dirty || postulacionForm.get('position_type_id')?.touched)"
+                                                        style="color:red;">
+                                                        <div
+                                                            *ngIf="postulacionForm.get('position_type_id')?.hasError('required')">
+                                                            <b>El campo es requerido</b>
+                                                        </div>
+                                                    </div>
+                                                </mat-form-field>
 
                                             </div>
                                             <div class="col-sm-6">
 
 
-                                                <mat-form-field>
+                                                <mat-form-field appearance="outline">
                                                     <mat-label>Cargo
                                                         Especialidad</mat-label>
-                                                    <mat-select  formControlName="position_id">
-                                                      <mat-option *ngFor="let item of positions" [value]="item.id">
-                                                        {{item.name}}
-                                                      </mat-option>
+                                                    <mat-select formControlName="position_id">
+                                                        <mat-option *ngFor="let item of positions" [value]="item.id">
+                                                            {{item.name}}
+                                                        </mat-option>
                                                     </mat-select>
-                                                  </mat-form-field>
+                                                    <div *ngIf="postulacionForm.get('position_id')?.invalid && (postulacionForm.get('position_id')?.dirty || postulacionForm.get('position_id')?.touched)"
+                                                        style="color:red;">
+                                                        <div
+                                                            *ngIf="postulacionForm.get('position_id')?.hasError('required')">
+                                                            <b>El campo es requerido</b>
+                                                        </div>
+                                                    </div>
+                                                </mat-form-field>
 
-                                               
+
                                             </div>
                                         </div>
-                                     
+
                                         <span class="preview-title-lg overline-title">DATOS DEL PAGO </span>
                                         <div class="row gy-4 align-center">
                                             <div class="col-sm-6">
 
 
 
-                                                <mat-form-field appearance="fill">
+                                                <mat-form-field appearance="outline">
                                                     <mat-label>Número de comprobante</mat-label>
-                                                    <input matInput  formControlName="voucher" >
+                                                    <input matInput formControlName="voucher">
+                                                    <div *ngIf="postulacionForm.get('voucher')?.invalid && (postulacionForm.get('voucher')?.dirty || postulacionForm.get('voucher')?.touched)"
+                                                        style="color:red;">
+                                                        <div
+                                                            *ngIf="postulacionForm.get('voucher')?.hasError('pattern')">
+                                                            <b>Ingrese solo números</b>
+                                                        </div>
+                                                        <div
+                                                            *ngIf="postulacionForm.get('voucher')?.hasError('required')">
+                                                            <b>El campo es requerido</b>
+                                                        </div>
+                                                    </div>
                                                 </mat-form-field>
 
 
                                             </div>
-                                             <div class="col-sm-6">
-                                                <mat-form-field>
+                                            <div class="col-sm-6">
+                                                <mat-form-field appearance="outline">
                                                     <mat-label>Foto comprobante</mat-label>
-                                                    <button mat-icon-button matPrefix (click)="f_input.click()" >
+                                                    <button mat-icon-button matPrefix (click)="f_input.click()">
                                                         <mat-icon>attach_file</mat-icon>
                                                     </button>
-                                                    <input type="text" readonly matInput formControlName="voucher_url" />
-                                                    <input type="file" multiple hidden #f_input  (change)="handleFileInputChange(f_input.files)" />
-
+                                                    <input type="text" readonly matInput
+                                                        formControlName="voucher_url" />
+                                                    <input type="file" multiple hidden #f_input
+                                                        (change)="handleFileInputChange(f_input.files)" />
+                                                    <div *ngIf="postulacionForm.get('voucher_url')?.invalid && (postulacionForm.get('voucher_url')?.dirty || postulacionForm.get('voucher_url')?.touched)"
+                                                        style="color:red;">
+                                                        <div
+                                                            *ngIf="postulacionForm.get('voucher_url')?.hasError('required')">
+                                                            <b>El campo es requerido</b>
+                                                        </div>
+                                                    </div>
                                                 </mat-form-field>
-                                            </div> 
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-md-2">
@@ -116,8 +159,10 @@
                                     <div class="col-md-2">
                                     </div>
                                     <div class="col-md-10 text-lg-end">
-                                        <a routerLink="/admin/postulation" mat-raised-button color="warn" mat-raised-button  class="mx-2">Cancelar</a>
-                                        <button (click)="onSubmit()" mat-raised-button color="primary">Guardar</button>
+                                        <a routerLink="/admin/postulation" mat-raised-button color="warn"
+                                            mat-raised-button class="mx-2">Cancelar</a>
+                                        <button (click)="onSubmit()" mat-raised-button color="primary" type="submit"
+                                            [disabled]="postulacionForm.invalid">Guardar</button>
                                     </div>
                                     <div class="col-md-2">
                                     </div>
@@ -126,8 +171,8 @@
                         </div>
                     </div>
                     <div class="col-md-2 col-xxl-2">
-                        <div *ngIf="announcementCurrent" >
-                            <app-card-announcement  [announcement]="announcementCurrent" ></app-card-announcement>
+                        <div *ngIf="announcementCurrent">
+                            <app-card-announcement [announcement]="announcementCurrent"></app-card-announcement>
                         </div>
                         <!-- .card -->
                     </div><!-- .col -->

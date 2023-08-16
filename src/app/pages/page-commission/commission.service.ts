@@ -4,6 +4,9 @@ import { HandleError, HttpErrorHandler } from 'src/app/http-error-handler.servic
 import { environment } from 'src/environments/environment.development';
 import { Commission, CommissionExternal, CommissionInternal } from './commission';
 import { Observable, catchError } from 'rxjs';
+import { Institution } from '../page-institution/institution';
+import { Position } from '../page-position/position';
+
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -102,6 +105,24 @@ export class CommissionService {
     return this.http.patch<CommissionExternal>(url, commissionAssigned, httpOptions)
       .pipe(
         catchError(this.handleError('updateCommissionAssigned', commissionAssigned))
+      );
+  }
+
+  getCommissionAssignedInstitutions(announcementId:number): Observable<Institution[]> {
+    const url = `${this.apiCommissionAssignedUrl}/institutions/${announcementId}`;
+
+    return this.http.get<Institution[]>(url)
+      .pipe(
+        catchError(this.handleError('getCommissionAssignedInstitutions', []))
+      );
+  }
+
+  getCommissionAssignedPositions(announcementId:number, institutionId:number): Observable<Position[]> {
+    const url = `${this.apiCommissionAssignedUrl}/institutions/${announcementId}/${institutionId}`;
+
+    return this.http.get<Position[]>(url)
+      .pipe(
+        catchError(this.handleError('getCommissionAssignedPositions', []))
       );
   }
 

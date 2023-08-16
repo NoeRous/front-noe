@@ -11,6 +11,8 @@ import { InboxService } from '../inbox.service';
 import { Inbox } from '../inbox';
 import { HandlePageEvent } from 'src/app/tools/paginate/handle-page-event';
 import { Router } from '@angular/router';
+import { AnnouncementService } from '../../page-announcement/announcement.service';
+import { Announcement } from '../../page-announcement/announcement';
 
 @Component({
   selector: 'app-dialog-derived-inbox',
@@ -27,9 +29,11 @@ export class DialogDerivedInboxComponent {
   paginate: HandlePageEvent = {pageIndex:1, pageSize:10};
   announcementId:number | undefined;
 
+  announcementCurrent : Announcement | undefined;
   derivedForm = this.fb.group({
     next_phase_id: [0, Validators.required],
     postulation_id: [0, Validators.required],
+    announcement_id:[0, Validators.required]
   });
 
   constructor(
@@ -39,6 +43,7 @@ export class DialogDerivedInboxComponent {
     private messageService: MessageService,
     private inboxService:InboxService,
     private router: Router,
+    private announcementService: AnnouncementService
   ) {
     if (data.data) {
       this.postulation = data.data;
@@ -47,7 +52,8 @@ export class DialogDerivedInboxComponent {
   }
 
   ngOnInit(): void {
-    this.getNextPhases()
+    this.getAnnouncementCurrent()
+   
     if (this.postulation) {
       var postulationId = this.postulation.id;
       this.derivedForm.controls['postulation_id'].setValue(postulationId);
@@ -55,8 +61,8 @@ export class DialogDerivedInboxComponent {
     }
   }
 
-  getNextPhases(): void {
-    this.inboxService.getNextPhases()
+  getNextPhases(announcementId:number): void {
+    this.inboxService.getNextPhases(announcementId)
       .subscribe(nextPhases => {
         this.nextPhases = nextPhases;
       });
@@ -78,5 +84,14 @@ export class DialogDerivedInboxComponent {
         });
     }
 
+  }
+
+  getAnnouncementCurrent(): void {
+    this.announcementService.getAnnouncementCurrent()
+      .subscribe(announcement => (this.announcementCurrent = announcement,
+        this.announcementId = announcement.id,
+        this.derivedForm.get('announcement_id')?.setValue(announcement.id),
+        this.getNextPhases(announcement.id)
+        ));
   }
 }

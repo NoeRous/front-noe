@@ -12,7 +12,7 @@
 
             <mat-form-field>
                 <mat-label>Convocatoria</mat-label>
-                <mat-select formControlName="announcent_id" (selectionChange)="selectionChangeAnnouncement($event)">
+                <mat-select formControlName="announcement_id" (selectionChange)="selectionChangeAnnouncement($event)">
                     <mat-option *ngFor="let item of announcements" [value]="item.id">
                         {{item.name}}
                     </mat-option>

@@ -16,6 +16,9 @@ import { DialogDerivedInboxComponent } from './dialog-derived-inbox/dialog-deriv
 import { EmployeeService } from '../page-employee/employee.service';
 import { EmployeeInstitution } from '../page-employee/employee';
 import { environment } from 'src/environments/environment.development';
+import { CommissionService } from '../page-commission/commission.service';
+import { Position } from '../page-position/position';
+import { Institution } from '../page-institution/institution';
 
 @Component({
   selector: 'app-page-inbox',
@@ -33,13 +36,16 @@ export class PageInboxComponent {
   nextPhaseId: any | undefined;
   announcementId: any | undefined;
   institutionId: any | undefined;
+  positionId: any | undefined;
   announcementIdSelect: any | undefined;
   isValid : any | undefined;
 
   postulationForValid: Inbox[] = [];
   postulationForDerived: Inbox[] = [];
   announcementCurrent: Announcement | undefined;
-  employeeInstitutions: EmployeeInstitution[] = [];
+
+  institutions: Institution[] = [];
+  positions:Position[]=[];
 
   loading = true
 
@@ -50,19 +56,19 @@ export class PageInboxComponent {
     public dialog: MatDialog,
     private messageService: MessageService,
     private announcementService: AnnouncementService,
-    private employeeService: EmployeeService
+    private employeeService: EmployeeService,
+    private commissionService:CommissionService
   ) { }
 
   announcementSelectForm = this.fb.group({
     announcementId: [''],
-    institutionId:['']
+    institutionId:[''],
+    positionId:['']
   });
 
 
   ngOnInit(): void {
     this.getAnnouncementCurrent();
-    this.announcementId = 2
-    this.announcementSelectForm.controls['announcementId'].setValue(this.announcementId);
     if (this.announcementId) {
      const id_ = this.announcementId;
      this.getPostulations(this.paginate,this.announcementId);
@@ -70,19 +76,15 @@ export class PageInboxComponent {
     if (this.paginate) {
       this.getPostulations(this.paginate,this.announcementId);
     }
-
-    this.getAnnouncements()
-    this.getEmployeeInstitutions(2)
-    this.getNextPhases()
   }
 
 
-  getPostulations(pageEvent: HandlePageEvent,announcementId = 1,institutionId = 0): void {
-    this.inboxService.getPaginatePostulations(pageEvent,announcementId,institutionId)
+  getPostulations(pageEvent: HandlePageEvent,announcementId = 1,institutionId = 0,positionId = 0): void {
+    this.inboxService.getPaginatePostulations(pageEvent,announcementId,institutionId,positionId)
       .subscribe(paginate => {
         if (paginate) {
           this.paginateInbox = paginate;
-          this.postulations = this.paginateInbox.items
+          this.postulations = paginate
         }else{
           this.postulations = []
         }
@@ -97,20 +99,22 @@ export class PageInboxComponent {
       });
   }
 
-  getEmployeeInstitutions(announcementId:number): void {
-    this.employeeService.getEmployeeInstitutions(announcementId)
-      .subscribe(employeeInstitutions => {
-        this.employeeInstitutions = employeeInstitutions;
+  getCommissionAssignedInstitutions(announcementId:number): void {
+    this.commissionService.getCommissionAssignedInstitutions(announcementId)
+      .subscribe(institutions => {
+        this.institutions = institutions;
       },(error) => {
        this.postulations = [];
       });
   }
 
 
-  getNextPhases(): void {
-    this.inboxService.getNextPhases()
-      .subscribe(nextPhases => {
-        this.nextPhases = nextPhases;
+  getCommissionAssignedPositions(announcementId:number,institutionId:number): void {
+    this.commissionService.getCommissionAssignedPositions(announcementId,institutionId)
+      .subscribe(positions => {
+        this.positions = positions;
+      },(error) => {
+       this.postulations = [];
       });
   }
 
@@ -118,20 +122,34 @@ export class PageInboxComponent {
   selectionChangeAnnouncement(item: any): void {
 
     this.announcementId = item.value
-
-    this.getEmployeeInstitutions(this.announcementId)
-    
+    this.getCommissionAssignedInstitutions(this.announcementId)
+      
     this.getPostulations(this.paginate,this.announcementId);
 
     this.router.navigate(['/admin/inbox']);
   }
   selectionChangeInstitution(item: any): void {
-    if(item){
+    if(item.value){
       this.institutionId = item.value
+      this.positionId = null;
       this.getPostulations(this.paginate,this.announcementId,this.institutionId);
+      this.getCommissionAssignedPositions(this.announcementId,this.institutionId);
       this.router.navigate(['/admin/inbox']);
     }else{
       this.getPostulations(this.paginate,this.announcementId);
+      this.positions = [];
+      this.router.navigate(['/admin/inbox']);
+    }
+  }
+
+  selectionChangePosition(item: any): void {
+    if(item.value){
+      this.positionId = item.value
+      this.getPostulations(this.paginate,this.announcementId,this.institutionId,this.positionId);
+      this.router.navigate(['/admin/inbox']);
+    }else{
+      this.positionId = null;
+      this.getPostulations(this.paginate,this.announcementId,this.institutionId);
       this.router.navigate(['/admin/inbox']);
     }
   }
@@ -164,6 +182,11 @@ export class PageInboxComponent {
 
   getAnnouncementCurrent(): void {
     this.announcementService.getAnnouncementCurrent()
-      .subscribe(announcement => (this.announcementCurrent = announcement));
+      .subscribe(announcement => (this.announcementCurrent = announcement,
+        this.announcementId = announcement.id,
+        this.announcementSelectForm.get('announcementId')?.setValue(this.announcementId),
+        this.getAnnouncements(),
+        this.getCommissionAssignedInstitutions(this.announcementId)
+        ));
   }
 }

@@ -37,12 +37,12 @@ export class InboxService {
 
 
 
-  getPaginatePostulations(e: HandlePageEvent,announcementId:number,instituttionId:number = 0): Observable<Paginate | null > {
+  getPaginatePostulations(e: HandlePageEvent,announcementId:number,institutionId:number = 0,positionId:number): Observable<any | null > {
     const url = `${this.apiUrl}/inbox/${announcementId}`;
     const options = e ?
-    { params: new HttpParams().set('page', e.pageIndex).set('limit', e.pageSize).set('intitutionId', instituttionId) } : {};
+    { params: new HttpParams().set('page', e.pageIndex).set('limit', e.pageSize).set('institutionId', institutionId).set('positionId', positionId) } : {};
 
-    return this.http.get<Paginate>(url, options)
+    return this.http.get<any>(url, options)
       .pipe(
         catchError(this.handleError('getQuestions', null))
       );
@@ -64,7 +64,8 @@ export class InboxService {
     const url = `${this.apiUrl}/derived`;
     const body = {
       next_phase_id: postulation.next_phase_id,
-      postulation_id: postulation.postulation_id
+      postulation_id: postulation.postulation_id,
+      announcement_id: postulation.announcement_id
     };
     
     return this.http.post(url, body)
@@ -75,8 +76,8 @@ export class InboxService {
 
   /* metodo para enviar a un area */
 
-  getNextPhases(): Observable<any[]> {
-    const url = `${this.apiPhaseUrl}/next-phase`;
+  getNextPhases(announcementId:number): Observable<any[]> {
+    const url = `${this.apiPhaseUrl}/next-phase/${announcementId}`;
 
     return this.http.get<any[]>(url)
       .pipe(

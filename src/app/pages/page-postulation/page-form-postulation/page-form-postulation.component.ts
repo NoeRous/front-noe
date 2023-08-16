@@ -26,11 +26,11 @@ export class PageFormPostulationComponent {
 
 
   postulacionForm = this.fb.group({
-    position_id: ['',Validators.required],
-    institution_id: ['',Validators.required],
-    position_type_id: ['',Validators.required],
-    voucher: ['', Validators.required],
-    announcent_id: ['',Validators.required],
+    position_id: ['', Validators.required],
+    institution_id: ['', Validators.required],
+    position_type_id: ['', Validators.required],
+    voucher: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
+    announcement_id: ['', Validators.required],
     voucher_url: ['', Validators.required],
   });
 
@@ -55,7 +55,7 @@ export class PageFormPostulationComponent {
   onSubmit() {
 
     const dialogRef = this.dialog.open(DialogConfirmComponent, {
-      data: { title: "Confirmar", message: `¿Esta seguro de realizar su Postulación?` },
+      data: { title: "Confirmar", message: `¿Esta seguro de realizar su postulación?` },
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -66,7 +66,7 @@ export class PageFormPostulationComponent {
             this.router.navigate(['/admin/postulation']);
             this.messageService.openSnackBar("Registrado correctamente");
           } else {
-            console.warn('error');
+            this.messageService.openSnackBar('Error comuniquese con la DGFM.');
           }
         });
       }
@@ -82,7 +82,7 @@ export class PageFormPostulationComponent {
       formData.append('file', file);
 
       this.postulationService.uploadImage(formData).subscribe((data) => {
-       this.postulacionForm.controls['voucher_url'].setValue(data.filename);
+        this.postulacionForm.controls['voucher_url'].setValue(data.filename);
       });
 
       //  this.display.patchValue(`${f.name}${count}`);
@@ -91,7 +91,7 @@ export class PageFormPostulationComponent {
     }
   }
 
-  getInstitutions(announcentId:number): void {
+  getInstitutions(announcentId: number): void {
     this.postulationService.getInstitutions(announcentId)
       .subscribe(institutions => (this.institutions = institutions));
   }
@@ -101,16 +101,16 @@ export class PageFormPostulationComponent {
       .subscribe(positionsType => (this.positionsType = positionsType));
   }
 
-  getPositions(tipoCargoId:number): void {
+  getPositions(tipoCargoId: number): void {
     this.postulationService.getPositions(this.announcentId, this.institutionId, tipoCargoId)
       .subscribe(positions => (this.positions = positions));
   }
 
-  doSomething(item:any){
+  doSomething(item: any) {
     this.getPositions(item.value)
   }
 
-  doSomethingTypePosition(item:any){
+  doSomethingTypePosition(item: any) {
     this.institutionId = item.value
     this.postulacionForm.get('position_type_id')?.reset();
     this.postulacionForm.get('position_id')?.reset();
@@ -120,7 +120,7 @@ export class PageFormPostulationComponent {
     this.announcementService.getAnnouncementCurrent().subscribe(announcement => {
       this.announcementCurrent = announcement;
       this.announcentId = announcement.id
-      this.postulacionForm.get('announcent_id')?.setValue(this.announcentId);
+      this.postulacionForm.get('announcement_id')?.setValue(this.announcentId);
       this.getInstitutions(this.announcentId)
     });
   }
